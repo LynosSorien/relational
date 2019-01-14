@@ -23,6 +23,11 @@ public abstract class AbstractEntityServiceImpl<E extends AbstractEntity, K exte
 	@Getter
 	private M mapper;
 	
+	public AbstractEntityServiceImpl(R repository, M mapper) {
+		this.repository = repository;
+		this.mapper = mapper;
+	}
+	
 	protected E getEntity(K id) {
 		Optional<E> optional = repository.findById(id);
 		if (optional.isPresent()) {

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(name = "RELATION_TYPES")
 @Entity
-public class RelationType implements AbstractEntity {
+public class RelationName implements AbstractEntity {
 	private static final long serialVersionUID = 787398949438466090L;
 	
 	@Id
