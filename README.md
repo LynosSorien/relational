@@ -3,9 +3,10 @@ Spring framework based application that contains REST-Service which communicates
 
 ## Technologies
 - Java 8
-- Spring Framework (2.1.2)
+- Spring Framework (Spring-boot 2.1.2).
 - MySql
 - H2 (for local environment)
+- Thymeleaf
 
 ## Libraries
 - Lombok
