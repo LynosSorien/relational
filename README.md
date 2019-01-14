@@ -11,3 +11,7 @@ Spring framework based application that contains REST-Service which communicates
 ## Libraries
 - Lombok
 - Mapstructs
+
+ ## Webjars
+ - JQuery
+ - Thymeleaf templates
