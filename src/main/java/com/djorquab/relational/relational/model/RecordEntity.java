@@ -13,25 +13,32 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "RECORDS")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "RELATION_TYPES")
-@Entity
-public class RelationName implements AbstractEntity {
-	private static final long serialVersionUID = 787398949438466090L;
-	
+public class RecordEntity implements AbstractEntity {
+	private static final long serialVersionUID = -6709546250865064828L;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "name", unique = true, nullable = false)
-	private String name;
-
+	@Column(name = "title")
+	private String title;
+	
+	@Column(name = "subtitle")
+	private String subtitle;
+	
+	@Column(name = "description")
+	private String description;
+	
 	@Column(name = "last_modified")
 	private Date lastModified;
 	
-	@Column(name = "registered_on")
+	@Column(name = "created_on")
 	private Date createdOn;
+
 }

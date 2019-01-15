@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.djorquab.relational.relational.dtos.User;
+import com.djorquab.relational.relational.bo.User;
 import com.djorquab.relational.relational.exceptions.EmailAlreadyRegisteredException;
 import com.djorquab.relational.relational.model.AuthenticatedUser;
 import com.djorquab.relational.relational.repositories.AuthenticatedUsersRepository;

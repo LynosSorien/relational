@@ -24,7 +24,7 @@ public abstract class AbstractEntityServiceImpl<E extends AbstractEntity, K exte
 	@Getter
 	private M mapper;
 	
-	public AbstractEntityServiceImpl(R repository, M mapper) {
+	public AbstractEntityServiceImpl(M mapper, R repository) {
 		this.repository = repository;
 		this.mapper = mapper;
 	}

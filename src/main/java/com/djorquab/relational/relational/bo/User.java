@@ -1,4 +1,4 @@
-package com.djorquab.relational.relational.dtos;
+package com.djorquab.relational.relational.bo;
 
 import java.io.Serializable;
 import java.util.Collection;

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="unauthorized-layout">
+      layout:decorate="unauthorized-layout">
     <head>
         <title>LogIn</title>
     </head>
@@ -22,7 +22,7 @@
 	            <div><label> Email : </label><input type="text" name="username" class="form-control"/> </div>
 	            <div><label> Password: </label><input type="password" name="password" class="form-control"/> </div>
 	            <div>&nbsp;</div>
-	            <div><input class="form-control" type="submit" value="Sign In"/></div>
+	            <div><input class="form-control btn btn-info" type="submit" value="Sign In"/></div>
 	        </form>
 	     	</div>
 	      </div>
