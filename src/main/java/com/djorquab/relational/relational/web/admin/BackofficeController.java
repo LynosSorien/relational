@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.djorquab.relational.relational.utils.BackofficeUtils;
 import com.djorquab.relational.relational.utils.Utils;
 
 @RestController
@@ -18,11 +19,6 @@ public class BackofficeController {
 	
 	@GetMapping
 	public ModelAndView backoffice() {
-		return new ModelAndView("backoffice", 
-				Utils.createParams(
-						"user",
-						SecurityContextHolder.getContext().getAuthentication()
-				)
-		);
+		return BackofficeUtils.createModelAndView("backoffice");
 	}
 }
