@@ -5,15 +5,16 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.repository.PagingAndSortingRepository;
+
 import lombok.Getter;
 
 import com.djorquab.relational.relational.mappers.AbstractMapper;
 import com.djorquab.relational.relational.model.AbstractEntity;
-import com.djorquab.relational.relational.repositories.AbstractRepository;
 import com.djorquab.relational.relational.services.AbstractEntityService;
 
 public abstract class AbstractEntityServiceImpl<E extends AbstractEntity, K extends Serializable, D extends Serializable,
-		M extends AbstractMapper<E, D>, R extends AbstractRepository<E, K>>
+		M extends AbstractMapper<E, D>, R extends PagingAndSortingRepository<E, K>>
 	implements AbstractEntityService<E, K, D, M, R> {
 	private static final long serialVersionUID = 747449136676541188L;
 
