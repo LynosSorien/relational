@@ -27,7 +27,7 @@ Go to the working copy and execute:
 or
 ```shell
 mvn clean package
-mvn spring-boot:run -Drun.spring-boot.profiles=<profiles>
+mvn spring-boot:run -Dspring-boot.profiles=<profiles>
 ```
 
 Change **<profile>** by any usable profiles.
