@@ -1,0 +1,27 @@
+<div th:fragment="pagedTable">
+	<div th:id="${id != null ? id : 'paged-table'}" class="paged-table" th:pagination-link="${pagedEndpoint}"
+		th:size="${size}">
+		<table class="table">
+			<thead>
+				<tr>
+					<th th:each="column : ${definition['columns']}" th:text="${column['header']}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="element : ${elements}">
+					<td th:each="column : ${definition['columns']}">
+						[[${element[column['variable']]}]]
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="paged-table-pagination">
+			<ul class="pagination">
+				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence(1, numberOfPages != null ? numberOfPages : 2)}">
+					<li><a th:page="${i}" th:class="@{'page-link '+${(i-1) == page ? 'active' : 'link-usable'}}" th:utext="${i}"></a></li>
+				</th:foreach>
+			</ul>
+		</div>
+	</div>
+	
+</div>

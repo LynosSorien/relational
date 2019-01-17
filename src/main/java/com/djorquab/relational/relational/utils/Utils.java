@@ -5,11 +5,15 @@ import java.util.Map;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Slf4j
 public class Utils {
 	
-	public static final Map<String, Object> createParams(Object ... objects) {
+	@SafeVarargs
+	public static final <T>Map<String, Object> createParams(Object ... objects) {
+		log.info("Current params {} : Size {}", objects, objects != null ? objects.length : "NULL");
 		if (objects == null || objects.length%2 != 0) {
 			return null;
 		}

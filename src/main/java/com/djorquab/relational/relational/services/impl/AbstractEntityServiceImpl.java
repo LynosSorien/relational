@@ -5,10 +5,14 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import lombok.Getter;
 
+import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.mappers.AbstractMapper;
 import com.djorquab.relational.relational.model.AbstractEntity;
 import com.djorquab.relational.relational.services.AbstractEntityService;
@@ -64,5 +68,24 @@ public abstract class AbstractEntityServiceImpl<E extends AbstractEntity, K exte
 	@Override
 	public List<D> findAll() {
 		return mapper.entitiesToDtos(repository.findAll());
+	}
+	
+	@Override
+	public PagedResult<D> findAllPaged(int page, int pageSize) {
+		Pageable pageable = PageRequest.of(page, pageSize);
+		Page<E> pageEntity = repository.findAll(pageable);
+		return transform(pageEntity, page, pageSize);
+	}
+	
+	private PagedResult<D> transform(Page<E> page, int currentPage, int pageSize) {
+		PagedResult<D> result = new PagedResult<>();
+		result.setPage(currentPage);
+		result.setPageSize(pageSize);
+		if (page != null) {
+			result.setNumberOfPages(page.getTotalPages());
+			result.setTotalElements(page.getTotalElements());
+			result.setElements(mapper.entitiesToDtos(page.getContent()));
+		}
+		return result;
 	}
 }

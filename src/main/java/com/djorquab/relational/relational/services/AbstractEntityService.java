@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.mappers.AbstractMapper;
 import com.djorquab.relational.relational.model.AbstractEntity;
 
@@ -17,4 +18,6 @@ public interface AbstractEntityService<E extends AbstractEntity, K extends Seria
 	void delete(K id);
 	
 	List<BO> findAll();
+	
+	PagedResult<BO> findAllPaged(int page, int pageSize);
 }
