@@ -49,5 +49,9 @@ public class UserAuthenticationManager implements UserDetailsService, Serializab
 		throw new UsernameNotFoundException(email);
 	}
 	
+	public long countUsers() {
+		return repository.count();
+	}
+	
 	
 }
