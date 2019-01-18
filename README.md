@@ -1,4 +1,10 @@
 # Relational
+**Branch status**
+###### Master
+[![Build Status](https://travis-ci.com/LynosSorien/relational.svg?branch=master)](https://travis-ci.com/LynosSorien/relational)
+###### Development
+[![Build Status](https://travis-ci.com/LynosSorien/relational.svg?branch=development)](https://travis-ci.com/LynosSorien/relational)
+
 Spring framework based application that contains REST-Service which communicates with database that is used to relationate concepts between them (initially used to hierachically relationate people for study purposes)
 
 ## Technologies
