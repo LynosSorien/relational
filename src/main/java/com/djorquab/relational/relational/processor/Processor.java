@@ -15,12 +15,19 @@ public abstract class Processor<E, A extends Annotation> {
 		this.scannedItems = new HashMap<>();
 	}
 	
-	public <T>E process(Class<T> clazz) {
+	public <T, CA extends Annotation> E process(Class<T> clazz) {
 		if (clazz != null) {
 			if (scannedItems.containsKey(clazz.getName())) {
 				return scannedItems.get(clazz.getName());
 			}
 			E instance = getObjectInstance();
+			Class<CA> classAnnotation = classAnnotation();
+			if (classAnnotation != null) {
+				CA ca = clazz.getAnnotation(classAnnotation);
+				if (ca != null) {
+					feedClassAnnotation(instance, ca);
+				}
+			}
 			Class<A> annotationClass = annotationClass();
 			Field[] fields = clazz.getDeclaredFields();
 			if (fields != null) {
@@ -42,7 +49,12 @@ public abstract class Processor<E, A extends Annotation> {
 		this.scannedItems.put(clazz,e);
 	}
 	
-	
+	protected <CA extends Annotation> E feedClassAnnotation(E instance, CA annotation) {
+		return instance;
+	}
+	protected <CA extends Annotation> Class<CA> classAnnotation() {
+		return null;
+	}
 	protected E postProcess(E instance) {
 		return instance;
 	}

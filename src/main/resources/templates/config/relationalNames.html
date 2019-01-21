@@ -11,7 +11,9 @@
 	        class="row">
 	     	<h1>Relational Names</h1>
 	     	<div th:remove="tag" th:include="fragments/tables :: pagedTable" 
-	     		th:with="pagedEndpoint='/backoffice/relational/names/paging', definition=${tableDefinition}, elements=${tableResult['elements']}, page=${tableResult['page']}, size=${tableResult['pageSize']}, pages=${tableResult['numberOfPages']}"></div>
+	     		th:with="id='relational-table', pagedEndpoint='/backoffice/relational/names/paging', definition=${tableDefinition}, elements=${tableResult['elements']}, page=${tableResult['page']}, size=${tableResult['pageSize']}, pages=${tableResult['numberOfPages']}, formClass='jumbotron'"></div>
+	     	<div th:remove="tag" th:include="fragments/forms :: simpleCreationForm"
+	     		th:with="form=${formDefinition}, callbacks='relational-table', callbackTypes='list', callbackUrls='/backoffice/relational/names/page'" ></div>
       	</div>
 	</body>
 </html>

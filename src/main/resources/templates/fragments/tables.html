@@ -9,8 +9,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="element : ${elements}">
-					<td th:each="column : ${definition['columns']}">
-						[[${element[column['variable']]}]]
+					<td th:each="column : ${definition['columns']}" th:text="${element[column['variable']]}">
 					</td>
 				</tr>
 			</tbody>

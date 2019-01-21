@@ -24,6 +24,7 @@ function scanTables() {
 					method: 'GET',
 					success: function(data) {
 						table.replaceWith(data);
+						scanTables();
 					}
 				});
 			});

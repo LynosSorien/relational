@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Processors {
 	private static TableDefinitionProcessor tableDefinitionProcessor;
+	private static FormProcessor formProcessor;
 	private static final String LOCK = "PROCESSOR-LOCK";
 	
 	public static TableDefinitionProcessor tableDefinitionInstance() {
@@ -17,5 +18,16 @@ public class Processors {
 			}
 		}
 		return tableDefinitionProcessor;
+	}
+	
+	public static FormProcessor formProcessorInstance() {
+		if (formProcessor == null) {
+			synchronized(LOCK) {
+				if (formProcessor == null) {
+					formProcessor = new FormProcessor();
+				}
+			}
+		}
+		return formProcessor;
 	}
 }
