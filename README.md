@@ -11,7 +11,7 @@ Spring framework based application that contains REST-Service which communicates
 - Java 8
 - Spring Framework (Spring-boot 2.1.2).
 - MySql
-- H2 (for local environment)
+- H2 (for local and testing environment)
 - Thymeleaf
 - Travis CI
 
