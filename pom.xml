@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.1.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.djorquab.relational</groupId>
 	<artifactId>relational</artifactId>
@@ -20,6 +20,7 @@
 		<bootstrap.version>3.3.5</bootstrap.version>
 		<mapstructs.version>1.1.0.Final</mapstructs.version>
 		<jquery.version>2.1.4</jquery.version>
+		<jacoco.version>0.8.2</jacoco.version>
 	</properties>
 
 	<dependencies>
@@ -64,7 +65,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- SWAGGER -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -76,12 +77,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-		
+
 		<!-- Webjars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -93,12 +94,12 @@
 			<artifactId>jquery</artifactId>
 			<version>${jquery.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
-		
+
 		<!-- Mapstructs -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -110,6 +111,12 @@
 			<artifactId>mapstruct-processor</artifactId>
 			<version>${mapstructs.version}</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>${jacoco.version}</version>
 		</dependency>
 	</dependencies>
 
