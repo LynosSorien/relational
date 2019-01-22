@@ -7,19 +7,7 @@ function customForms() {
 	$(".custom-forms").each(function() {
 		let customForm = $(this);
 		let link = customForm.attr("link");
-		let callbacks = [];
-		if (customForm.attr("callbacks")) {
-			var callbacksForm = customForm.attr("callbacks").split(",");
-			var callbackTypes = customForm.attr("callback-types").split(",");
-			var callbackUrls = customForm.attr("callback-urls").split(",");
-			for (let index = 0; index < callbacksForm.length ; index++) {
-				var callbackItem = {};
-				callbackItem['id'] = callbacksForm[index];
-				callbackItem['type'] = callbackTypes[index];
-				callbackItem['url'] = callbackUrls[index];
-				callbacks.push(callbackItem);
-			}
-		}
+		let callbacks = createCallbackObject(customForm);
 		let method = customForm.attr("method");
 		
 		customForm.find(".custom-submit-button").each(function() {
@@ -48,6 +36,7 @@ function customForms() {
 						url: link+"?"+paramsLink,
 						success: function(data) {
 							createFormResultMessage(data, "success");
+							callCallbacks(data, callbacks);
 						},
 						error: function(data) {
 							createFormResultMessage(data, "error");
@@ -62,6 +51,7 @@ function customForms() {
 						data: JSON.stringify(postObject),
 						success: function(data) {
 							createFormResultMessage(data, "success");
+							callCallbacks(data, callbacks);
 						},
 						error: function(data) {
 							createFormResultMessage(data, "error");

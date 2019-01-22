@@ -18,7 +18,7 @@ function scanTables() {
 		table.find(".paged-table-pagination").each(function() {
 			let currentPage = $(this);
 			currentPage.find(".link-usable").click(function() {
-				var link = paginationEndpoint+"?"+pageVar+"="+$(this).attr("page")+"&"+sizeVar+"="+table.attr("size");
+				var link = paginationEndpoint+"?"+pageVar+"="+$(this).attr("page")+"&"+sizeVar+"="+table.attr("size")+"&id="+id;
 				$.ajax({
 					url: link,
 					method: 'GET',

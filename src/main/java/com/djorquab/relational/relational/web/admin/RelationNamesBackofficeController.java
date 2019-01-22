@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.djorquab.relational.relational.BackofficeConstants;
 import com.djorquab.relational.relational.bo.RelationNameBO;
 import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.commons.ResponseDTO;
@@ -46,12 +47,15 @@ public class RelationNamesBackofficeController {
 	}
 	
 	@GetMapping("/paging")
-	public ModelAndView pagingRelationalNames(@RequestParam(name = "page", defaultValue = "1") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
+	public ModelAndView pagingRelationalNames(@RequestParam(name = "page", defaultValue = "1") int page, 
+			@RequestParam(name = "size", defaultValue = "10") int size,
+			@RequestParam(name = BackofficeConstants.ID, defaultValue = "") String id) {
 		page = page-1;
 		PagedResult<RelationNameBO> result = service.findAllPaged(page, size);
 		return BackofficeUtils.fragmentWithTableDefinition("fragments/tables :: pagedTable", 
 				RelationNameBO.class,
 				"pagedEndpoint", "/backoffice/relational/names/paging",
-				"tableResult", result);
+				"tableResult", result,
+				BackofficeConstants.ID, id);
 	}
 }

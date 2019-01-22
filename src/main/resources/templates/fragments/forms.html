@@ -1,5 +1,5 @@
 <div th:fragment="simpleCreationForm">
-	<div th:id="${id != null ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}" 
+	<div th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}" 
 		th:link="${form['submitLink']}" th:method="${form['method']}"
 		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}">
 		<th:foreach th:remove="tag" th:each="field : ${form.fields}">
