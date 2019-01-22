@@ -13,9 +13,10 @@ Spring framework based application that contains REST-Service which communicates
 - Java 8
 - Spring Framework (Spring-boot 2.1.2).
 - MySql
-- H2 (for local and testing environment)
+- H2 (for local environment)
 - Thymeleaf
-- Travis CI
+- [Travis CI](https://travis-ci.org/LynosSorien/relational)
+- [Codecov](https://codecov.io/gh/LynosSorien/relational)
 
 ## Libraries
 - Lombok
