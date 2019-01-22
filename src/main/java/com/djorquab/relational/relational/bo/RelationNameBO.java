@@ -3,6 +3,8 @@ package com.djorquab.relational.relational.bo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.djorquab.relational.relational.commons.ActionType;
+import com.djorquab.relational.relational.processor.ActionDefinition;
 import com.djorquab.relational.relational.processor.FormDef;
 import com.djorquab.relational.relational.processor.FormField;
 import com.djorquab.relational.relational.processor.ViewColumn;
@@ -20,7 +22,7 @@ import lombok.Builder;
 public class RelationNameBO implements Serializable {
 	private static final long serialVersionUID = 8823793833431291554L;
 	
-	@ViewColumn(header = "ID")
+	@ViewColumn(header = "ID", action = @ActionDefinition(active = true, type = ActionType.DELETE, pathVariable = false, path = "/backoffice/relational/names", requestParam = "relationId"))
 	private Long id;
 	@ViewColumn(header = "Name")
 	@FormField(label="Name")

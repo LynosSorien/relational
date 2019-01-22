@@ -28,20 +28,18 @@ public class BackofficeUtils {
 	
 	public static final Map<String, Object> initialAuthParams(Object ... params) {
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		log.info("Current params {}, size {}", params, params.length);
 		Map<String, Object> mapParams = Utils.createParams(params);
 		if (mapParams == null) {
 			mapParams = new HashMap<>();
 		}
 		mapParams.put("user", UserDTO.builder().username(authUser.getUsername()).build());
-		log.info("initialAuthParams - Auth map with params {}", mapParams);
 		return mapParams;
 	}
 	
 	public static final ModelAndView createModelAndViewWithTableDefinition(String template, Class<?> tableClass, Object ... params) {
 		Map<String, Object> mapParams = initialAuthParams(params);
 		mapParams.put("tableDefinition", Processors.tableDefinitionInstance().process(tableClass));
-		log.info("Map params {}", mapParams);
+		log.debug("Map params {}", mapParams);
 		return new ModelAndView(template,
 				mapParams);
 	}
@@ -50,7 +48,7 @@ public class BackofficeUtils {
 		Map<String, Object> mapParams = initialAuthParams(params);
 		mapParams.put("tableDefinition", Processors.tableDefinitionInstance().process(tableClass));
 		mapParams.put("formDefinition", Processors.formProcessorInstance().process(formClass));
-		log.info("Map params {}", mapParams);
+		log.debug("Map params {}", mapParams);
 		return new ModelAndView(template,
 				mapParams);
 	}
@@ -65,7 +63,7 @@ public class BackofficeUtils {
 			mapParams.put("size", pagedResult.getPageSize());
 			mapParams.put("numberOfPages", pagedResult.getNumberOfPages());
 		}
-		log.info("Map params {}", mapParams);
+		log.debug("Map params {}", mapParams);
 		return new ModelAndView(template,
 				mapParams);
 	}

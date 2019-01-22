@@ -17,4 +17,5 @@ public class TableDefinition implements Serializable {
 
 	private String id;
 	private List<ColumnDefinition> columns;
+	private List<Action> actions;
 }

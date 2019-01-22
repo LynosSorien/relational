@@ -5,18 +5,31 @@
 			<thead>
 				<tr>
 					<th th:each="column : ${definition['columns']}" th:text="${column['header']}"></th>
+					<th th:if="${definition['actions'] != null}" th:each="action: ${definition['actions']}"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="element : ${elements}">
 					<td th:each="column : ${definition['columns']}" th:text="${element[column['variable']]}">
 					</td>
+					<td th:if="${definition['actions'] != null}" th:each="action : ${definition['actions']}">
+						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DELETE}">
+							<button
+								th:action-url="${action.path}"
+								th:action-variable-value="${element[action['variable']]}"
+								th:action-path-variable="${action['pathVariable']}"
+								th:action-request-param="${action['requestParam']}"
+								th:action-method="DELETE"
+								th:parent-id="${id != null ? id : 'paged-table'}"
+								class="custom-action btn btn-danger">Delete</button>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="paged-table-pagination">
 			<ul class="pagination">
-				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence(1, numberOfPages != null ? numberOfPages : 2)}">
+				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence(1, numberOfPages != null ? numberOfPages : 1)}">
 					<li><a th:page="${i}" th:class="@{'page-link '+${(i-1) == page ? 'active' : 'link-usable'}}" th:utext="${i}"></a></li>
 				</th:foreach>
 			</ul>
@@ -24,7 +37,10 @@
 	</div>
 	<th:block layout:fragment="script">
            <script>
-                scanTables();
+           		$(document).ready(function() {
+           			scanTables();
+                    scanActions();
+           		});
            </script>
      </th:block>
 </div>

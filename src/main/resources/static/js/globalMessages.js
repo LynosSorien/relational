@@ -26,7 +26,7 @@ function createGlobalMessage(message, type, icon) {
         ' alert-dismissible"><span class="' +
         icon +
         '"></span> <span>' +
-        message +
+        JSON.stringify(message).replace(/"/g, "") +
         '</span><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
     ).appendTo("#global-messages");
 }

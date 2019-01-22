@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import com.djorquab.relational.relational.commons.Action;
 import com.djorquab.relational.relational.commons.ColumnDefinition;
 import com.djorquab.relational.relational.commons.TableDefinition;
 
@@ -26,6 +27,21 @@ public class TableDefinitionProcessor extends Processor<TableDefinition, ViewCol
 			instance.setColumns(new LinkedList<>());
 		}
 		instance.getColumns().add(definition);
+		
+		ActionDefinition actionDefinition = annotation.action();
+		if (actionDefinition != null && actionDefinition.active()) {
+			Action action = Action.builder()
+					.path(actionDefinition.path())
+					.type(actionDefinition.type())
+					.pathVariable(actionDefinition.pathVariable())
+					.requestParam("".equals(actionDefinition.requestParam()) ? field.getName() : actionDefinition.requestParam())
+					.variable(field.getName())
+					.build();
+			if (instance.getActions() == null) {
+				instance.setActions(new LinkedList<>());
+			}
+			instance.getActions().add(action);
+		}
 		return instance;
 	}
 	
