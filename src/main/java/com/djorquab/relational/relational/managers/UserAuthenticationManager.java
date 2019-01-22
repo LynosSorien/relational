@@ -53,5 +53,10 @@ public class UserAuthenticationManager implements UserDetailsService, Serializab
 		return repository.count();
 	}
 	
-	
+	public void deleteUserByEmail(String email) {
+		AuthenticatedUser user = repository.findByEmail(email);
+		if (user != null) {
+			repository.delete(user);
+		}
+	}
 }

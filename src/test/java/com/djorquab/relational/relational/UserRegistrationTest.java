@@ -32,6 +32,7 @@ public class UserRegistrationTest {
 	
 	@Autowired
 	private UserAuthenticationManager manager;
+	
 	@Autowired
 	private PasswordEncoder encoder;
 	
@@ -96,5 +97,15 @@ public class UserRegistrationTest {
 		manager.register(auth);
 		User user = (User)manager.loadUserByUsername(EMAIL_TEST_2);
 		Assert.assertNotEquals(user.getUsername(), EMAIL_TEST_1);
+	}
+	
+	@Test
+	public void twoUsersWithDeletions() throws EmailAlreadyRegisteredException {
+		AuthenticatedUser auth = user(EMAIL_TEST_1, NAME_TEST_1, PASSWORD_1);
+		manager.register(auth);
+		auth = user(EMAIL_TEST_2, NAME_TEST_2, PASSWORD_2);
+		manager.register(auth);
+		manager.deleteUserByEmail(EMAIL_TEST_1);
+		Assert.assertEquals(manager.countUsers(), 1L);
 	}
 }

@@ -1,0 +1,41 @@
+package com.djorquab.relational.relational;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import com.djorquab.relational.relational.bo.RelationNameBO;
+import com.djorquab.relational.relational.repositories.RelationNamesRepository;
+import com.djorquab.relational.relational.services.RelationNameService;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
+public class RelationNamesTest {
+	@Autowired
+	private RelationNameService service;
+	
+	@Autowired
+	private RelationNamesRepository repository;
+	
+	private RelationNameBO create(String name) {
+		return RelationNameBO.builder().name(name).build();
+	}
+	
+	@Test
+	public void noValues() {
+		Assert.assertEquals(repository.count(), 0L);
+	}
+	
+	@Test
+	public void insertOneElement() {
+		RelationNameBO relation = service.save(create("testing"));
+		Assert.assertEquals(repository.count(), 1L);
+		Assert.assertNotNull(relation.getId());
+	}
+}
