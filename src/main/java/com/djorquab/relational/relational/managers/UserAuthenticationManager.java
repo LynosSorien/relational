@@ -43,7 +43,7 @@ public class UserAuthenticationManager implements UserDetailsService, Serializab
 			User user = new User();
 			user.setUsername(authenticatedUser.getEmail());
 			user.setPassword(authenticatedUser.getPassword());
-			// TODO implementate this: user.setRoles(roles);
+			// TODO implement this: user.setRoles(roles);
 			return user;
 		}
 		throw new UsernameNotFoundException(email);

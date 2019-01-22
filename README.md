@@ -21,11 +21,24 @@ Spring framework based application that contains REST-Service which communicates
 ## Libraries
 - Lombok
 - Mapstructs
+- JaCoCo (for test coverage, used by Codecov)
 
 ## Webjars
  - JQuery
  - Thymeleaf templates
 
+## Project Structure
+- src/main/resources
+    - /**templates**
+        - All thymeleaf templates (include fragments, backoffice pages and layouts).
+    - /**static**
+        - CSS and JS and static contents (small images for example)
+- src/main/java
+    - Code application (Spring-boot based)
+- src/test/java
+    - Test classes
+- pom.xml    
+- run.sh  
 
 ## How to run
 First of all we must ensure that we have installed Java 8 (at least).
@@ -40,7 +53,7 @@ mvn clean package
 mvn spring-boot:run -Dspring-boot.profiles=<profiles>
 ```
 
-Change **<profile>** by any usable profiles.
+Change **\<profile\>** by any usable profiles.
 
 # Profiles
  - local
