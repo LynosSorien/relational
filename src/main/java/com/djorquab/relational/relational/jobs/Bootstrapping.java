@@ -2,7 +2,10 @@ package com.djorquab.relational.relational.jobs;
 
 import javax.annotation.PostConstruct;
 
+import lombok.Getter;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.djorquab.relational.relational.bo.RelationNameBO;
@@ -14,6 +17,10 @@ import com.djorquab.relational.relational.services.RelationNameService;
 
 @Component
 public class Bootstrapping {
+	@Value("${admin.email}")
+	@Getter
+	private String adminEmail;
+	
 	@Autowired
 	private PropertyManager propertyManager;
 	
@@ -31,9 +38,14 @@ public class Bootstrapping {
 		}
 	}
 	
+	public void forceBootstrapping() {
+		putUsers();
+		putRelations();
+	}
+	
 	private void putUsers() {
 		AuthenticatedUser user = new AuthenticatedUser();
-		user.setEmail("admin@test.com");
+		user.setEmail(getAdminEmail());
 		user.setName("Administrator");
 		user.setPassword("test");
 		try {

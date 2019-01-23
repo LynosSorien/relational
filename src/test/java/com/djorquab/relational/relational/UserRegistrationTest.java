@@ -3,6 +3,7 @@ package com.djorquab.relational.relational;
 import java.util.Calendar;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,11 @@ public class UserRegistrationTest extends AbstractTest {
 		user.setName(name);
 		user.setPassword(encoder.encode(password));
 		return user;
+	}
+	
+	@Before
+	public void before() {
+		manager.deleteUserByEmail("admin@test.com");
 	}
 	
 	@Test

@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.djorquab.relational.relational.RelationalApplication;
 import com.djorquab.relational.relational.bo.RelationNameBO;
 import com.djorquab.relational.relational.commons.NamedDTO;
+import com.djorquab.relational.relational.repositories.RelationNamesRepository;
 import com.djorquab.relational.relational.services.RelationNameService;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -33,6 +35,14 @@ public class RestRelationNamesTest extends AbstractRestTest {
 
 	@Autowired
 	private RelationNameService service;
+	
+	@Autowired
+	private RelationNamesRepository repository;
+	
+	@Before
+	public void cleanBootstrapping() {
+		repository.deleteAll();
+	}
 	
 	@Test
 	public void serializeTest() throws Exception {
