@@ -26,6 +26,11 @@ public class FormProcessorTest extends AbstractTest {
 	public static final String SUBMIT_LINK = "www.google.com";
 	
 	@Test
+	public void nullTest() {
+		Assert.assertNull(processor.process(null));
+	}
+	
+	@Test
 	public void oneFieldTestWithoutHeader() {
 		FormDefinition definition = processor.process(SimpleFormObject.class);
 		Assert.assertNotNull(definition);

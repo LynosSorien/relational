@@ -44,4 +44,20 @@ public class RelationNamesTest extends AbstractTest {
 		Assert.assertEquals(repository.count(), 1L);
 		Assert.assertNotNull(relation.getId());
 	}
+	
+	@Test
+	public void loadById() {
+		RelationNameBO saved = service.save(create("testing"));
+		RelationNameBO relation = service.getById(saved.getId());
+		Assert.assertNotNull(relation);
+		Assert.assertEquals("testing", relation.getName());
+		Assert.assertEquals(relation.getId(), saved.getId());
+	}
+	
+	@Test
+	public void deleteById() {
+		RelationNameBO saved = service.save(create("testing"));
+		service.delete(saved.getId());
+		Assert.assertEquals(0L, repository.count());
+	}
 }

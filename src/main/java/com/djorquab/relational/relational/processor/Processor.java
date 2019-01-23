@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public abstract class Processor<E, A extends Annotation> {
 	@Getter
 	private Map<String, E> scannedItems;
@@ -55,9 +57,9 @@ public abstract class Processor<E, A extends Annotation> {
 	protected <CA extends Annotation> Class<CA> classAnnotation() {
 		return null;
 	}
-	protected E postProcess(E instance) {
-		return instance;
-	}
+	
+	protected abstract E postProcess(E instance);
+	
 	protected boolean passConditions(A annotation, E instance, Field field) {
 		return true;
 	}
@@ -66,7 +68,7 @@ public abstract class Processor<E, A extends Annotation> {
 		try {
 			return instanceClass().newInstance();
 		} catch (InstantiationException|IllegalAccessException e) {
-			e.printStackTrace();
+			log.error("Unexpected error occured while trying to create new instance {}", e);
 		}
 		return null;
 	}

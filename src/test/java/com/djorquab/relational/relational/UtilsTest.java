@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.djorquab.relational.relational.bo.RelationNameBO;
 import com.djorquab.relational.relational.commons.UserDTO;
 import com.djorquab.relational.relational.utils.BackofficeUtils;
+import com.djorquab.relational.relational.utils.Utils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -34,5 +35,10 @@ public class UtilsTest {
 		ModelAndView sample = BackofficeUtils.createModelAndViewWithTableDefinition("sample", RelationNameBO.class);
 		Assert.assertNotNull(sample);
 		Assert.assertEquals(sample.getViewName(), "sample");
+	}
+	
+	@Test
+	public void utilsTest() {
+		Assert.assertEquals(0L, Utils.createParams().size());
 	}
 }
