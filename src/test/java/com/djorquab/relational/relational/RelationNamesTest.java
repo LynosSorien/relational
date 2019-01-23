@@ -16,7 +16,7 @@ import com.djorquab.relational.relational.services.RelationNameService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-public class RelationNamesTest {
+public class RelationNamesTest extends AbstractTest {
 	@Autowired
 	private RelationNameService service;
 	

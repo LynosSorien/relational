@@ -21,7 +21,7 @@ import com.djorquab.relational.relational.model.AuthenticatedUser;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-public class UserRegistrationTest {
+public class UserRegistrationTest extends AbstractTest {
 	private static final String EMAIL_TEST_1 = "test@t.c";
 	private static final String NAME_TEST_1 = "TEST von test";
 	private static final String PASSWORD_1 = "test";

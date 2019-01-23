@@ -18,7 +18,7 @@ import com.djorquab.relational.relational.processor.Processors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FormProcessorTest {
+public class FormProcessorTest extends AbstractTest {
 	private FormProcessor processor = Processors.formProcessorInstance();
 	
 	public static final String NAME = "Name";

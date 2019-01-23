@@ -18,7 +18,7 @@ import com.djorquab.relational.relational.processor.ViewColumn;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TableProcessorTest {
+public class TableProcessorTest extends AbstractTest {
 	private TableDefinitionProcessor processor = Processors.tableDefinitionInstance();
 	
 	public static final String NAME_HEADER = "Name";

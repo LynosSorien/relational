@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.djorquab.relational.relational.BackofficeConstants;
-import com.djorquab.relational.relational.bo.User;
 import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.commons.UserDTO;
 import com.djorquab.relational.relational.processor.Processors;
@@ -27,12 +27,15 @@ public class BackofficeUtils {
 	}
 	
 	public static final Map<String, Object> initialAuthParams(Object ... params) {
-		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Map<String, Object> mapParams = Utils.createParams(params);
 		if (mapParams == null) {
 			mapParams = new HashMap<>();
 		}
-		mapParams.put("user", UserDTO.builder().username(authUser.getUsername()).build());
+		
+		UserDetails authUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = authUser.getUsername();
+		
+		mapParams.put("user", UserDTO.builder().username(username).build());
 		return mapParams;
 	}
 	
