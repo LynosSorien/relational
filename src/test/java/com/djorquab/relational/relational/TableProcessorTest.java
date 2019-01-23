@@ -51,6 +51,12 @@ public class TableProcessorTest {
 		Assert.assertNotNull(definition);
 		Assert.assertNull(definition.getActions());
 	}
+	
+	@Test
+	public void cachingProcessor() {
+		TableDefinition definition = processor.process(TableTestOneColumnItem.class);
+		Assert.assertTrue(definition == processor.process(TableTestOneColumnItem.class));
+	}
 }
 
 
