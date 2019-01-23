@@ -14,11 +14,10 @@ import com.djorquab.relational.relational.rest.AbstractRestTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = RelationalApplication.class)
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
-public class RestRelationNamesBackofficeTest extends AbstractRestTest {
+public class RestBackofficeTest extends AbstractRestTest {
 	@Test
-	@WithMockUser(username = "testing")
-	public void simplePetitions() {
-		simpleGetPetition("/backoffice/relational/names");
-		simpleGetPetition("/backoffice/relational/names/paging");
+	@WithMockUser(username = "testuser")
+	public void simplePageTest() {
+		simpleGetPetition("/backoffice");
 	}
 }
