@@ -25,7 +25,7 @@ public abstract class Processor<E, A extends Annotation> {
 			if (classAnnotation != null) {
 				CA ca = clazz.getAnnotation(classAnnotation);
 				if (ca != null) {
-					feedClassAnnotation(instance, ca);
+					instance = feedClassAnnotation(instance, ca);
 				}
 			}
 			Class<A> annotationClass = annotationClass();
