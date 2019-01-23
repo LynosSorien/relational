@@ -38,11 +38,6 @@ public class Bootstrapping {
 		}
 	}
 	
-	public void forceBootstrapping() {
-		putUsers();
-		putRelations();
-	}
-	
 	private void putUsers() {
 		AuthenticatedUser user = new AuthenticatedUser();
 		user.setEmail(getAdminEmail());
