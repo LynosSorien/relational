@@ -54,7 +54,6 @@ public class FormProcessorTest {
 
 @Data
 class SimpleFormObject {
-	
 	@FormField(label = FormProcessorTest.NAME, type = FieldType.TEXT)
 	private String name;
 }
@@ -62,7 +61,6 @@ class SimpleFormObject {
 @Data
 @FormDef(method = "GET", submitButtonLabel = FormProcessorTest.SUBMIT_BUTTON, submitLink = FormProcessorTest.SUBMIT_LINK)
 class SimpleFormObjectWithHeader {
-	
 	@FormField(label = FormProcessorTest.NAME, type = FieldType.TEXT)
 	private String name;
 }
