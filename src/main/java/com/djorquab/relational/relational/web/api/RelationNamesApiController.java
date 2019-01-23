@@ -23,9 +23,6 @@ public class RelationNamesApiController {
 	
 	@PostMapping
 	public ResponseEntity<String> create(@RequestBody NamedDTO relationName) {
-		if (relationName == null || relationName.getName().trim().isEmpty()) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Name is required");
-		}
 		relationName.setName(relationName.getName().trim());
 		if (!service.existsRelationWithName(relationName.getName())) {
 			service.save(RelationNameBO.builder().name(relationName.getName()).build());

@@ -18,7 +18,7 @@ import lombok.Builder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FormDef(method = "POST", submitLink = "/backoffice/relational/names")
+@FormDef(method = "POST", submitLink = "/api/relation/names")
 public class RelationNameBO implements Serializable {
 	private static final long serialVersionUID = 8823793833431291554L;
 	

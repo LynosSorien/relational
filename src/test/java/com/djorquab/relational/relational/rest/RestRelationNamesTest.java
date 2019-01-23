@@ -128,4 +128,10 @@ public class RestRelationNamesTest extends AbstractRestTest {
 		Assert.assertNotNull(relations);
 		Assert.assertEquals(relations.size(), 1L);
 	}
+	
+	@Test
+	public void failToCallWithoutParams() throws Exception {
+		MvcResult result = mvc.perform(MockMvcRequestBuilders.post("/api/relation/names")).andReturn();
+		Assert.assertEquals(result.getResponse().getStatus(), HttpStatus.BAD_REQUEST.value());
+	}
 }
