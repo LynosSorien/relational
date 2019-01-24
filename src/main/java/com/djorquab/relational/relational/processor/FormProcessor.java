@@ -47,7 +47,9 @@ public class FormProcessor extends Processor<FormDefinition, FormField> {
 	
 	@Override
 	protected FormDefinition postProcess(FormDefinition instance) {
-		Collections.sort(instance.getFields());
+		if (instance != null && instance.getFields() != null && instance.getFields().size() > 1) {
+			Collections.sort(instance.getFields());
+		}
 		return instance;
 	}
 

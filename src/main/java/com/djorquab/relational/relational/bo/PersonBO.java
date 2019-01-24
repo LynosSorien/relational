@@ -19,7 +19,6 @@ public class PersonBO implements Serializable {
 	private Long id;
 	private String name;
 	private String surname;
-	private CountryBO country;
 	private String description;
 	private Date birthday;
 	private Date deathDate;

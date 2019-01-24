@@ -32,6 +32,15 @@ public class PersonEntity implements AbstractEntity {
 	@Column(name = "surname")
 	private String surname;
 	
+	@Column(name = "description", nullable = true)
+	private String description;
+	
+	@Column(name = "birthday", nullable = true)
+	private Date birthday;
+	
+	@Column(name = "deathdate", nullable = true)
+	private Date deathdate;
+	
 	@Column(name = "last_modified")
 	private Date lastModified;
 	

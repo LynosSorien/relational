@@ -17,7 +17,7 @@ import com.djorquab.relational.relational.services.RelationNameService;
 
 @Component
 public class Bootstrapping {
-	@Value("${admin.email}")
+	@Value("${admin.email:}")
 	@Getter
 	private String adminEmail;
 	

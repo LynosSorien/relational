@@ -15,5 +15,5 @@ public @interface FormField {
 	String label();
 	FieldType type() default FieldType.TEXT;
 	int position() default -1;
-	int colspan() default 1;
+	int colspan() default 12;
 }

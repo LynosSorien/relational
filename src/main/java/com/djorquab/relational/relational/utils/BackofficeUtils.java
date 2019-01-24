@@ -31,17 +31,26 @@ public class BackofficeUtils {
 		if (mapParams == null) {
 			mapParams = new HashMap<>();
 		}
-		
-		UserDetails authUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = authUser.getUsername();
-		
-		mapParams.put("user", UserDTO.builder().username(username).build());
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails authUser = null;
+		if (principal != null && principal instanceof UserDetails) {
+			authUser = (UserDetails) principal;
+		}
+		mapParams.put("user", UserDTO.builder().username(authUser != null ? authUser.getUsername() : "Guest").build());
 		return mapParams;
 	}
 	
 	public static final ModelAndView createModelAndViewWithTableDefinition(String template, Class<?> tableClass, Object ... params) {
 		Map<String, Object> mapParams = initialAuthParams(params);
 		mapParams.put("tableDefinition", Processors.tableDefinitionInstance().process(tableClass));
+		log.debug("Map params {}", mapParams);
+		return new ModelAndView(template,
+				mapParams);
+	}
+	
+	public static final ModelAndView createModelAndViewWithFormDefinition(String template, Class<?> tableClass, Object ... params) {
+		Map<String, Object> mapParams = initialAuthParams(params);
+		mapParams.put("formDefinition", Processors.formProcessorInstance().process(tableClass));
 		log.debug("Map params {}", mapParams);
 		return new ModelAndView(template,
 				mapParams);

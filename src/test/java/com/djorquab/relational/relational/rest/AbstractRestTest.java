@@ -61,7 +61,7 @@ public abstract class AbstractRestTest extends AbstractTest {
 			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get(path);
 			if (params != null) {
 				for (TestParam<?> param : params) {
-					builder = builder.requestAttr(param.getParam(), param.getValue());
+					builder = builder.param(param.getParam(), param.getValue() != null ? param.getValue().toString() : null);
 				}
 			}
 			result = mvc.perform(builder).andReturn();
@@ -80,7 +80,7 @@ public abstract class AbstractRestTest extends AbstractTest {
 			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.delete(path);
 			if (params != null) {
 				for (TestParam<?> param : params) {
-					builder = builder.param(param.getParam(), param.getValue().toString());
+					builder = builder.param(param.getParam(), param.getValue() != null ? param.getValue().toString() : null);
 				}
 			}
 			result = mvc.perform(builder).andReturn();

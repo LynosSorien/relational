@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+    <head>
+        <title>People</title>
+    </head>
+    <body>
+	    <div layout:fragment="content"
+	        class="row">
+	     	<h1>People</h1>
+	     	<!-- PUT SEARCHABLE FIELDS -->
+	     	<div>
+				<a href="/backoffice/people/creation" class="btn btn-info">Create</a>
+			</div>
+	     	<div th:remove="tag" th:include="fragments/tables :: pagedTable" 
+	     		th:with="id='relational-table', pagedEndpoint='/backoffice/people/paging', definition=${tableDefinition}, elements=${tableResult['elements']}, page=${tableResult['page']}, size=${tableResult['pageSize']}, pages=${tableResult['numberOfPages']}"></div>	     		
+      	</div>
+	</body>
+</html>

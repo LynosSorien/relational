@@ -47,7 +47,9 @@ public class TableDefinitionProcessor extends Processor<TableDefinition, ViewCol
 	
 	@Override
 	protected TableDefinition postProcess(TableDefinition instance) {
-		Collections.sort(instance.getColumns());
+		if (instance.getColumns() != null && instance.getColumns().size() > 1) {
+			Collections.sort(instance.getColumns());
+		}
 		return instance;
 	}
 	
