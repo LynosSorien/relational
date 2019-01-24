@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.djorquab.relational.relational.BackofficeConstants;
 import com.djorquab.relational.relational.bo.PersonBO;
 import com.djorquab.relational.relational.commons.PagedResult;
+import com.djorquab.relational.relational.forms.PersonForm;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.utils.BackofficeUtils;
 
@@ -48,7 +49,7 @@ public class PeopleBackofficeController {
 		if (personId != null) {
 			person = service.getById(personId);
 		}
-		return BackofficeUtils.createModelAndViewWithFormDefinition("config/people/creation", PersonBO.class, "person", person != null ? person : PersonBO.builder().build());
+		return BackofficeUtils.createModelAndViewWithFormDefinition("config/people/creation", PersonForm.class, "person", person != null ? person : PersonBO.builder().build());
 	}
 	
 	@GetMapping("/edit")

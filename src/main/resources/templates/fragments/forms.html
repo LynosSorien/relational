@@ -2,12 +2,19 @@
 	<div th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}" 
 		th:link="${form['submitLink']}" th:method="${form['method']}"
 		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}">
-		<th:foreach th:remove="tag" th:each="field : ${form.fields}">
-			<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT}" class="form-group">
-				<label th:for="${field.variable}" th:text="${field.label}"></label>
-				<input th:id="${field.variable}" type="text" class="form-control form-item" th:variable="${field.variable}" th:submit="${true}"/>
-			</div>
-			<button class="custom-submit-button btn btn-info">[[${form['submitButtonLabel']}]]</button>
-		</th:foreach>
+		<div class="row">
+			<th:foreach th:remove="tag" th:each="field : ${form.fields}">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT}" class="form-grou">
+					<label th:for="${field.variable}" th:text="${field.label}"></label>
+					<input th:id="${field.variable}" type="text" th:class="@{'form-control form-item col-sm-' + ${field.colspan}}" th:variable="${field.variable}" th:submit="${true}"/>
+				</div>
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION}" class="form-grou">
+					<label th:for="${field.variable}" th:text="${field.label}"></label>
+					<textarea rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item col-sm-' + ${field.colspan}}" th:variable="${field.variable}" th:submit="${true}">
+					</textarea>
+				</div>
+			</th:foreach>
+		</div>
+		<button class="custom-submit-button btn btn-info">[[${form['submitButtonLabel']}]]</button>
 	</div>
 </div>
