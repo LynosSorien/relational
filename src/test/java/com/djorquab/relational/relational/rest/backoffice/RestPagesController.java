@@ -17,11 +17,11 @@ public class RestPagesController extends AbstractRestTest {
 	
 	@Test
 	public void publicPages() {
-		simpleGetPetition("/");
+		get("/");
 	}
 	
 	@Test
 	public void simpleGreetingsController() {
-		simpleGetPetition("/greetings");
+		get("/greetings");
 	}
 }

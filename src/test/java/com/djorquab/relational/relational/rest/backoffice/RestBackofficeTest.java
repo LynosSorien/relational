@@ -18,6 +18,6 @@ public class RestBackofficeTest extends AbstractRestTest {
 	@Test
 	@WithMockUser(username = "testuser")
 	public void simplePageTest() {
-		simpleGetPetition("/backoffice");
+		get("/backoffice");
 	}
 }

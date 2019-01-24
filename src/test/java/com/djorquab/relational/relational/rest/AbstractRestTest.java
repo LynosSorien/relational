@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -54,17 +55,41 @@ public abstract class AbstractRestTest extends AbstractTest {
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
-	public MvcResult simpleGetPetition(String path) {
+	public MvcResult get(String path, TestParam<?> ... params) {
 		MvcResult result;
 		try {
-			result = mvc.perform(MockMvcRequestBuilders.get(path)
-					).andReturn();
+			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get(path);
+			if (params != null) {
+				for (TestParam<?> param : params) {
+					builder = builder.requestAttr(param.getParam(), param.getValue());
+				}
+			}
+			result = mvc.perform(builder).andReturn();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 		
-		Assert.assertEquals(result.getResponse().getStatus(), HttpStatus.OK.value());
+		Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		return result;
+	}
+	
+	public MvcResult delete(String path, TestParam<?> ... params) {
+		MvcResult result;
+		try {
+			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.delete(path);
+			if (params != null) {
+				for (TestParam<?> param : params) {
+					builder = builder.param(param.getParam(), param.getValue().toString());
+				}
+			}
+			result = mvc.perform(builder).andReturn();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 		return result;
 	}
 }
