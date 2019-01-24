@@ -74,6 +74,8 @@ function createFormResultMessage(data, state) {
 	} else {
 		if (data.message) {
 			message = data.message;
+		} else if (data.responseJSON && data.responseJSON.message){
+			message = data.responseJSON.message;
 		} else {
 			message = data;
 		}

@@ -11,6 +11,7 @@ public class RelationalApplicationTests extends AbstractTest{
 
 	@Test
 	public void contextLoads() {
+		RelationalApplication.main(new String[]{});
 	}
 
 }

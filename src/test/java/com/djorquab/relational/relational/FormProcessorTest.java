@@ -21,6 +21,7 @@ import com.djorquab.relational.relational.processor.Processors;
 public class FormProcessorTest extends AbstractTest {
 	private FormProcessor processor = Processors.formProcessorInstance();
 	
+	public static final String ID = "ID";
 	public static final String NAME = "Name";
 	public static final String SUBMIT_BUTTON = "Test";
 	public static final String SUBMIT_LINK = "www.google.com";
@@ -55,10 +56,26 @@ public class FormProcessorTest extends AbstractTest {
 		Assert.assertEquals("name", field.getVariable());
 		Assert.assertEquals(FieldType.TEXT, field.getType());
 	}
+	
+	@Test
+	public void twoFieldsTestWithoutHeader() {
+		FormDefinition definition = processor.process(SimpleFormObjectTwoFields.class);
+		Assert.assertNotNull(definition);
+		Assert.assertNull(definition.getMethod());
+		Assert.assertEquals(2L, definition.getFields().size());
+	}
 }
 
 @Data
 class SimpleFormObject {
+	@FormField(label = FormProcessorTest.NAME, type = FieldType.TEXT)
+	private String name;
+}
+
+@Data
+class SimpleFormObjectTwoFields {
+	@FormField(label = FormProcessorTest.ID, type = FieldType.TEXT)
+	private String id;
 	@FormField(label = FormProcessorTest.NAME, type = FieldType.TEXT)
 	private String name;
 }

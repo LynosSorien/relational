@@ -1,4 +1,4 @@
-package com.djorquab.relational.relational;
+package com.djorquab.relational.relational.services;
 
 import java.util.Calendar;
 
@@ -14,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.djorquab.relational.relational.AbstractTest;
 import com.djorquab.relational.relational.bo.User;
 import com.djorquab.relational.relational.exceptions.EmailAlreadyRegisteredException;
 import com.djorquab.relational.relational.managers.UserAuthenticationManager;

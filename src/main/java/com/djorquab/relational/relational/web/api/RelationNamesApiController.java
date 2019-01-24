@@ -1,6 +1,9 @@
 package com.djorquab.relational.relational.web.api;
 
+import java.io.Serializable;
 import java.util.List;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,22 +16,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.djorquab.relational.relational.bo.RelationNameBO;
 import com.djorquab.relational.relational.commons.NamedDTO;
+import com.djorquab.relational.relational.commons.ResponseDTO;
 import com.djorquab.relational.relational.services.RelationNameService;
 
 @RestController
 @RequestMapping("/api/relation/names")
+@Slf4j
 public class RelationNamesApiController {
 	@Autowired
 	private RelationNameService service;
 	
 	@PostMapping
-	public ResponseEntity<String> create(@RequestBody NamedDTO relationName) {
+	public ResponseEntity<ResponseDTO<Serializable>> create(@RequestBody NamedDTO relationName) {
+		log.info("Adding new relation... {}", relationName);
 		relationName.setName(relationName.getName().trim());
 		if (!service.existsRelationWithName(relationName.getName())) {
 			service.save(RelationNameBO.builder().name(relationName.getName()).build());
-			return ResponseEntity.ok("The relation name has been registered correctly");
+			return ResponseEntity.ok(ResponseDTO.builder().message("The relation name has registered correctly").build());
 		} else {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("This relation already exists!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseDTO.builder().message("This relation already exists!").build());
 		}
 	}
 	

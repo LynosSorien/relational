@@ -40,5 +40,10 @@ public class UtilsTest {
 	@Test
 	public void utilsTest() {
 		Assert.assertEquals(0L, Utils.createParams().size());
+		Map<String, Object> params = Utils.createParams("test-param", 50L);
+		Assert.assertNotNull(params);
+		Assert.assertEquals(params.size(), 1L);
+		Assert.assertTrue(params.containsKey("test-param"));
+		Assert.assertEquals(params.get("test-param"), 50L);
 	}
 }

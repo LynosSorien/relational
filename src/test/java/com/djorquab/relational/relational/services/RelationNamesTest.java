@@ -1,4 +1,4 @@
-package com.djorquab.relational.relational;
+package com.djorquab.relational.relational.services;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,6 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.djorquab.relational.relational.AbstractTest;
 import com.djorquab.relational.relational.bo.RelationNameBO;
 import com.djorquab.relational.relational.repositories.RelationNamesRepository;
 import com.djorquab.relational.relational.services.RelationNameService;
