@@ -26,6 +26,7 @@ Spring framework based application that contains REST-Service which communicates
 ## Webjars
  - JQuery
  - Thymeleaf templates
+ - bootstrap-datepicker
 
 ## Project Structure
 - src/main/resources

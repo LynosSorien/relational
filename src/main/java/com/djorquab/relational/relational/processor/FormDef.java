@@ -8,5 +8,6 @@ public @interface FormDef {
 	String title() default "";
 	String submitLink();
 	String method() default "POST";
+	String navigateTo() default "";
 	String submitButtonLabel() default "Submit";// TODO change for identificators to bundle.
 }

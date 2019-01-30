@@ -20,4 +20,5 @@ public class FormDefinition implements Serializable {
 	private String submitLink;
 	private String submitButtonLabel;
 	private List<FormFieldDefinition> fields;
+	private String navigateTo;
 }

@@ -22,7 +22,12 @@ import lombok.Builder;
 public class RelationNameBO implements Serializable {
 	private static final long serialVersionUID = 8823793833431291554L;
 	
-	@ViewColumn(header = "ID", action = @ActionDefinition(active = true, type = ActionType.DELETE, pathVariable = false, path = "/backoffice/relational/names", requestParam = "relationId"))
+	@ViewColumn(header = "ID",
+			actions = {
+					@ActionDefinition(active = true, type = ActionType.EDIT, pathVariable = true, path = "/backoffice/relational/names/edit", method = "GET"),
+					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/relational/names", requestParam = "relationId")
+			}
+	)
 	private Long id;
 	@ViewColumn(header = "Name")
 	@FormField(label="Name")

@@ -69,6 +69,6 @@ class TableTestOneColumnItem {
 @Data
 class TableTestOneActionItem {
 	@ViewColumn(header = TableProcessorTest.NAME_HEADER,
-			action = @ActionDefinition(active = true, path = TableProcessorTest.TEST_PATH, type = ActionType.DELETE, pathVariable = false, requestParam = TableProcessorTest.NAME_REQUEST))
+			actions = @ActionDefinition(active = true, path = TableProcessorTest.TEST_PATH, type = ActionType.DELETE, pathVariable = false, requestParam = TableProcessorTest.NAME_REQUEST))
 	private String name;
 }

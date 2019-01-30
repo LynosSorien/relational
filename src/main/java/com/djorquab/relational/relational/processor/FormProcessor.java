@@ -36,6 +36,7 @@ public class FormProcessor extends Processor<FormDefinition, FormField> {
 		instance.setSubmitButtonLabel(def.submitButtonLabel());
 		instance.setSubmitLink(def.submitLink());
 		instance.setTitle(def.title());
+		instance.setNavigateTo(def.navigateTo());
 		return instance;
 	}
 	

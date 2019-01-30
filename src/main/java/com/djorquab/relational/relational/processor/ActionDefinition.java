@@ -15,4 +15,5 @@ public @interface ActionDefinition {
 	boolean pathVariable() default false;
 	String path() default "";
 	String requestParam() default "";
+	String method() default "";
 }

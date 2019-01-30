@@ -6,8 +6,14 @@ import java.util.Date;
 import com.djorquab.relational.relational.commons.FieldType;
 import com.djorquab.relational.relational.processor.FormDef;
 import com.djorquab.relational.relational.processor.FormField;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@FormDef(method = "POST", submitButtonLabel = "Create", submitLink = "/backoffice/people")
+@FormDef(submitButtonLabel = "Create", submitLink = "/api/people", navigateTo = "/backoffice/people")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonForm implements Serializable {
 	private static final long serialVersionUID = -5241309306612469463L;
 	
@@ -16,13 +22,16 @@ public class PersonForm implements Serializable {
 	
 	@FormField(label = "Surname", type = FieldType.TEXT, position = 1, colspan = 6)
 	private String surname;
+
+	@FormField(label = "Image URL", type = FieldType.TEXT, position = 2)
+	private String image;
 	
-	@FormField(label = "Description", type = FieldType.DESCRIPTION, colspan = 12, position = 2)
+	@FormField(label = "Description", type = FieldType.DESCRIPTION, position = 3)
 	private String description;
 	
-	@FormField(label = "Birthday", type = FieldType.DATE, colspan = 4, position = 3)
+	@FormField(label = "Birthday", type = FieldType.DATE, colspan = 4, position = 4)
 	private Date birthday;
 	
-	@FormField(label = "Deathdate", type = FieldType.DATE, colspan = 4, position = 4)
+	@FormField(label = "Deathdate", type = FieldType.DATE, colspan = 4, position = 5)
 	private Date deathdate;
 }

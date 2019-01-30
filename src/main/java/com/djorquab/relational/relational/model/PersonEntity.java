@@ -26,25 +26,28 @@ public class PersonEntity implements AbstractEntity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
 	@Column(name = "surname")
 	private String surname;
 	
-	@Column(name = "description", nullable = true)
+	@Column(name = "description")
 	private String description;
+
+	@Column(name = "image")
+	private String image;
 	
-	@Column(name = "birthday", nullable = true)
+	@Column(name = "birthday")
 	private Date birthday;
 	
-	@Column(name = "deathdate", nullable = true)
+	@Column(name = "deathdate")
 	private Date deathdate;
 	
-	@Column(name = "last_modified")
+	@Column(name = "last_modified", nullable = false)
 	private Date lastModified;
 	
-	@Column(name = "created_on")
+	@Column(name = "created_on", nullable = false)
 	private Date createdOn;
 
 }

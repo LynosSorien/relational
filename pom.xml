@@ -21,6 +21,7 @@
 		<mapstructs.version>1.1.0.Final</mapstructs.version>
 		<jquery.version>2.1.4</jquery.version>
 		<jacoco.version>0.8.2</jacoco.version>
+		<datepicker.version>1.8.0</datepicker.version>
 	</properties>
 
 	<dependencies>
@@ -93,6 +94,11 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrap-datepicker</artifactId>
+			<version>${datepicker.version}</version>
 		</dependency>
 
 		<dependency>

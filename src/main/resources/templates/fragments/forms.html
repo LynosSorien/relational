@@ -1,17 +1,28 @@
 <div th:fragment="simpleCreationForm">
 	<div th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}" 
 		th:link="${form['submitLink']}" th:method="${form['method']}"
-		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}">
+		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}"
+		 th:navigate-to="${form.navigateTo}"
+	>
 		<div class="row">
 			<th:foreach th:remove="tag" th:each="field : ${form.fields}">
-				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT}" class="form-grou">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
-					<input th:id="${field.variable}" type="text" th:class="@{'form-control form-item col-sm-' + ${field.colspan}}" th:variable="${field.variable}" th:submit="${true}"/>
+					<input th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
 				</div>
-				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION}" class="form-grou">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
-					<textarea rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item col-sm-' + ${field.colspan}}" th:variable="${field.variable}" th:submit="${true}">
-					</textarea>
+					<textarea rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"></textarea>
+				</div>
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DATE}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+					<label th:for="${field.variable}" th:text="${field.label}"></label>
+					<div class="input-group date datepicker">
+						<input data-date-format="dd/mm/yyyy" th:id="${field.variable}" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
+						<div class="input-group-addon">
+							<span class="glyphicon glyphicon-th"></span>
+						</div>
+					</div>
+					<!--<input data-date-format="dd/mm/yyyy HH:MM" th:id="${field.variable}" th:class="@{'form-control form-item datepicker'}" th:variable="${field.variable}" th:submit="${true}"/>-->
 				</div>
 			</th:foreach>
 		</div>

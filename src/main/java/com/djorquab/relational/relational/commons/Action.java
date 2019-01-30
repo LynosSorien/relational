@@ -14,9 +14,12 @@ import lombok.NoArgsConstructor;
 public class Action implements Serializable {
 	private static final long serialVersionUID = -1143869554889968354L;
 
+	private String name;
 	private String variable;
 	private String requestParam;
 	private String path;
-	@Builder.Default private boolean pathVariable = false;
+	@Builder.Default
+	private boolean pathVariable = false;
 	private ActionType type;
+	private String method;
 }

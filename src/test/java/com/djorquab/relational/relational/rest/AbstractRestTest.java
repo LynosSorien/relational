@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
@@ -70,6 +71,28 @@ public abstract class AbstractRestTest extends AbstractTest {
 			throw new RuntimeException(e);
 		}
 		
+		Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		return result;
+	}
+
+	public MvcResult post(String path, Object requestBody, TestParam<?> ... params) {
+		MvcResult result;
+		try {
+			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(path);
+			if (requestBody != null) {
+				builder = builder.contentType(MediaType.APPLICATION_JSON).content(toJson(requestBody));
+			}
+			if (params != null) {
+				for (TestParam<?> param : params) {
+					builder = builder.param(param.getParam(), param.getValue() != null ? param.getValue().toString() : null);
+				}
+			}
+			result = mvc.perform(builder).andReturn();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+
 		Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 		return result;
 	}

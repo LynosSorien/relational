@@ -8,7 +8,7 @@ function scanActions() {
 			let requestParam = action.attr("action-request-param");
 			let method = action.attr("action-method");
 			let parentId = action.attr("parent-id");
-			
+
 			if (pathVariable && pathVariable === "true") {
 				url = url+"/"+value+"?id="+parentId;
 			} else {

@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	customForms();
+	$(".datepicker").datepicker();
 });
 
 
@@ -9,6 +10,7 @@ function customForms() {
 		let link = customForm.attr("link");
 		let callbacks = createCallbackObject(customForm);
 		let method = customForm.attr("method");
+		let navigateTo = customForm.attr("navigate-to");
 		
 		customForm.find(".custom-submit-button").each(function() {
 			let button = $(this);
@@ -35,8 +37,11 @@ function customForms() {
 						type: 'GET',
 						url: link+"?"+paramsLink,
 						success: function(data) {
-							createFormResultMessage(data, "success");
 							callCallbacks(data, callbacks);
+							if ("" !== navigateTo) {
+                                location.href = navigateTo;
+                            }
+							createFormResultMessage(data, "success");
 						},
 						error: function(data) {
 							createFormResultMessage(data, "error");
@@ -50,8 +55,11 @@ function customForms() {
 						contentType: 'application/json',
 						data: JSON.stringify(postObject),
 						success: function(data) {
-							createFormResultMessage(data, "success");
 							callCallbacks(data, callbacks);
+							if ("" !== navigateTo) {
+                                location.href = navigateTo;
+                            }
+                            createFormResultMessage(data, "success");
 						},
 						error: function(data) {
 							createFormResultMessage(data, "error");

@@ -19,9 +19,19 @@
 								th:action-variable-value="${element[action['variable']]}"
 								th:action-path-variable="${action['pathVariable']}"
 								th:action-request-param="${action['requestParam']}"
-								th:action-method="DELETE"
+								th:action-method="${action.method}"
 								th:parent-id="${id != null ? id : 'paged-table'}"
 								class="custom-action btn btn-danger">Delete</button>
+						</div>
+						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).EDIT}">
+							<button
+									th:action-url="${action.path}"
+									th:action-variable-value="${element[action['variable']]}"
+									th:action-path-variable="${action['pathVariable']}"
+									th:action-request-param="${action['requestParam']}"
+									th:action-method="${action.method}"
+									th:parent-id="${id != null ? id : 'paged-table'}"
+									class="custom-action btn btn-warning">Edit</button>
 						</div>
 					</td>
 				</tr>

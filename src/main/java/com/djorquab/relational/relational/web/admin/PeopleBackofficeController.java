@@ -1,12 +1,10 @@
 package com.djorquab.relational.relational.web.admin;
 
+import com.djorquab.relational.relational.commons.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.djorquab.relational.relational.BackofficeConstants;
@@ -15,6 +13,8 @@ import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.forms.PersonForm;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.utils.BackofficeUtils;
+
+import java.io.Serializable;
 
 @RestController
 @RequestMapping("/backoffice/people")
@@ -56,11 +56,11 @@ public class PeopleBackofficeController {
 	public ModelAndView editPage(@RequestParam("personId") Long personId) {
 		return creation(personId);
 	}
-	
-	@PostMapping
-	public ModelAndView create(@RequestBody PersonBO person) {
-		service.save(person);
-		return people();
+
+	@DeleteMapping
+	public ModelAndView remove(@RequestParam("personId") Long personId) {
+		service.delete(personId);
+		return paging(1, 10, "relational-table");
 	}
 
 }

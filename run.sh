@@ -1,2 +1,2 @@
-mvn clean package
-mvn spring-boot:run -Dspring-boot.run.profiles=$1
+mvn clean package -Dmaven.test.skip=true
+mvn spring-boot:run -Dmaven.test.skip=true -Dspring-boot.run.profiles=$1

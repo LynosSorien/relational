@@ -9,7 +9,8 @@
 		<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
 		<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap-theme.min.css}" />
 		<script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-		<script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/3.3.5/js/bootstrap.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js}"></script>
 		<script th:src="@{/static/js/globalMessages.js}"></script>
 		<script th:src="@{/static/js/actions.js}"></script>
 		<script th:src="@{/static/js/callback-system.js}"></script>
@@ -39,6 +40,14 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                     role="button" aria-haspopup="true" aria-expanded="false"
+                     >Entities <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="/backoffice/people">People</a></li>
+                  </ul>
+              </li>
           	<li class="dropdown">
           		<a href="#" class="dropdown-toggle" data-toggle="dropdown"
           			role="button" aria-haspopup="true" aria-expanded="false"
