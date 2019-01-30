@@ -4,6 +4,7 @@ import com.djorquab.relational.relational.bo.PersonBO;
 import com.djorquab.relational.relational.repositories.PeopleRepository;
 import com.djorquab.relational.relational.services.PeopleService;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 
 	@Autowired
 	private PeopleRepository repository;
+
+	@Before
+	public void clean() {
+		repository.deleteAll();
+	}
 
 	@Test
 	@WithMockUser(username = "testing")

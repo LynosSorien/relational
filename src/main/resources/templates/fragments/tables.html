@@ -10,7 +10,18 @@
 			</thead>
 			<tbody>
 				<tr th:each="element : ${elements}">
-					<td th:each="column : ${definition['columns']}" th:text="${element[column['variable']]}">
+					<td th:each="column : ${definition['columns']}">
+						<div th:remove="tag" th:if="${column.withLink}">
+							<a class="table-link" th:link="${column.link}" th:with-path-variable="${column.pathVariable}"
+								th:type="${column.linkType}" th:value="${element[column.variable]}">
+						</div>
+						<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).TEXT}" th:text="${element[column['variable']]}"></div>
+						<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).IMAGE}">
+							<img class="table-row-image" th:src="${element[column['variable']]}" />
+						</div>
+						<div th:remove="tag" th:if="${column.withLink}">
+							</a>
+						</div>
 					</td>
 					<td th:if="${definition['actions'] != null}" th:each="action : ${definition['actions']}">
 						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DELETE}">

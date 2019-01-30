@@ -1,9 +1,6 @@
 package com.djorquab.relational.relational.web.admin;
 
-import com.djorquab.relational.relational.commons.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,8 +10,6 @@ import com.djorquab.relational.relational.commons.PagedResult;
 import com.djorquab.relational.relational.forms.PersonForm;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.utils.BackofficeUtils;
-
-import java.io.Serializable;
 
 @RestController
 @RequestMapping("/backoffice/people")
@@ -58,9 +53,9 @@ public class PeopleBackofficeController {
 	}
 
 	@DeleteMapping
-	public ModelAndView remove(@RequestParam("personId") Long personId) {
+	public ModelAndView remove(@RequestParam("personId") Long personId, @RequestParam(name = "id", required = false) String htmlId) {
 		service.delete(personId);
-		return paging(1, 10, "relational-table");
+		return paging(1, 10, htmlId);
 	}
 
 }

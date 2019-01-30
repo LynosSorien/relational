@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class PersonBO implements Serializable {
 	private static final long serialVersionUID = 2303305096393347270L;
 
-	@ViewColumn(header = "ID", position = 0,
+	@ViewColumn(header = "ID", position = 0, link = "/backoffice/people/view", pathVariable = true, linkable = true,
 			actions = {
 					@ActionDefinition(active = true, type = ActionType.EDIT, path = "/backoffice/people/edit", requestParam = "personId", method = "GET"),
 					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/people", requestParam = "personId", method = "DELETE")
@@ -32,16 +32,13 @@ public class PersonBO implements Serializable {
 	private String name;
 	@ViewColumn(header = "Surname", position = 2)
 	private String surname;
-	@ViewColumn(header = "Description", position = 3)
 	private String description;
-	@ViewColumn(header = "Birthday", position = 4)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date birthday;
-	@ViewColumn(header = "Deathdate", position = 5)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date deathdate;
 
-	@ViewColumn(header = "Image", position = 6, type = ColumnType.IMAGE)
+	@ViewColumn(header = "Image", position = 3, type = ColumnType.IMAGE)
 	private String image;
 	
 	private Date lastModified;

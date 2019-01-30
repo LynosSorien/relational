@@ -42,6 +42,7 @@ public class TableDefinitionProcessor extends Processor<TableDefinition, ViewCol
 			if ("".equals(method)) {
 				switch(actionDefinition.type()) {
 					case EDIT:
+					case VIEW:
 						method = "GET";
 						break;
 					case DELETE:
