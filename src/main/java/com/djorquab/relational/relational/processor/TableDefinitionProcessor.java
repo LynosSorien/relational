@@ -43,8 +43,10 @@ public class TableDefinitionProcessor extends Processor<TableDefinition, ViewCol
 				switch(actionDefinition.type()) {
 					case EDIT:
 						method = "GET";
+						break;
 					case DELETE:
 						method = "DELETE";
+						break;
 					default:
 						method = "POST";
 					break;
