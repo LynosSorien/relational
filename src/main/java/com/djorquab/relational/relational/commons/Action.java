@@ -20,6 +20,8 @@ public class Action implements Serializable {
 	private String path;
 	@Builder.Default
 	private boolean pathVariable = false;
+	@Builder.Default
+	private boolean newLocation = false;
 	private ActionType type;
 	private String method;
 }

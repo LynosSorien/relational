@@ -23,7 +23,7 @@ public class PersonBO implements Serializable {
 
 	@ViewColumn(header = "ID", position = 0, link = "/backoffice/people/view", pathVariable = true, linkable = true,
 			actions = {
-					@ActionDefinition(active = true, type = ActionType.EDIT, path = "/backoffice/people/edit", requestParam = "personId", method = "GET"),
+					@ActionDefinition(active = true, type = ActionType.EDIT, path = "/backoffice/people/edit", requestParam = "personId", newLocation = true),
 					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/people", requestParam = "personId", method = "DELETE")
 			}
 	)
@@ -33,9 +33,9 @@ public class PersonBO implements Serializable {
 	@ViewColumn(header = "Surname", position = 2)
 	private String surname;
 	private String description;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
-	@JsonFormat(pattern = "dd/MM/yyyy")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date deathdate;
 
 	@ViewColumn(header = "Image", position = 3, type = ColumnType.IMAGE)

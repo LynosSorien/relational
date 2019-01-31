@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class FormFieldDefinition implements Comparable<FormFieldDefinition>, Serializable {
 	private static final long serialVersionUID = -1273250837751498006L;
-	
+
+	@Builder.Default
+	private boolean hidden = false;
 	private String variable;
 	private String label;
 	private FieldType type;

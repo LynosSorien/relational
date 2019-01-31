@@ -1,5 +1,7 @@
 package com.djorquab.relational.relational;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -45,5 +47,11 @@ public class UtilsTest {
 		Assert.assertEquals(params.size(), 1L);
 		Assert.assertTrue(params.containsKey("test-param"));
 		Assert.assertEquals(params.get("test-param"), 50L);
+	}
+
+	@Test
+	public void createDate() throws ParseException {
+		Date date = Utils.dateFromString("2019-01-31", "yyyy-MM-dd");
+		Assert.assertNotNull(date);
 	}
 }

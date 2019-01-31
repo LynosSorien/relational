@@ -1,8 +1,7 @@
 $(document).ready(function() {
 	customForms();
-	$(".datepicker").datepicker();
+	loadDatepickers();
 });
-
 
 function customForms() {
 	$(".custom-forms").each(function() {
@@ -93,4 +92,15 @@ function createFormResultMessage(data, state) {
 	} else if (state === "error") {
 		createGlobalErrorMessage(message);
 	}
+}
+
+function loadDatepickers() {
+    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+    $(".datepicker").each(function(){
+        let datepicker = $(this);
+
+        datepicker.datepicker({
+            format: datepicker.attr("data-date-format")
+        });
+    });
 }

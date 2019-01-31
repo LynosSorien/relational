@@ -60,6 +60,7 @@ public class TableDefinitionProcessor extends Processor<TableDefinition, ViewCol
 					.requestParam("".equals(actionDefinition.requestParam()) ? field.getName() : actionDefinition.requestParam())
 					.variable(field.getName())
 					.method(method)
+					.newLocation(actionDefinition.newLocation())
 					.build();
 			if (instance.getActions() == null) {
 				instance.setActions(new LinkedList<>());

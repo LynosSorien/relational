@@ -24,10 +24,11 @@ public class RelationNameBO implements Serializable {
 	
 	@ViewColumn(header = "ID",
 			actions = {
-					@ActionDefinition(active = true, type = ActionType.EDIT, pathVariable = true, path = "/backoffice/relational/names/edit", method = "GET"),
+					//@ActionDefinition(active = true, type = ActionType.EDIT, pathVariable = true, path = "/backoffice/relational/names/edit", method = "GET"),
 					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/relational/names", requestParam = "relationId")
 			}
 	)
+	@FormField(label = "ID", hidden = true)
 	private Long id;
 	@ViewColumn(header = "Name")
 	@FormField(label="Name")

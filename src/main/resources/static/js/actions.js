@@ -8,25 +8,34 @@ function scanActions() {
 			let requestParam = action.attr("action-request-param");
 			let method = action.attr("action-method");
 			let parentId = action.attr("parent-id");
+			let newLocation = action.attr("new-location");
 
 			if (pathVariable && pathVariable === "true") {
 				url = url+"/"+value+"?id="+parentId;
 			} else {
 				url = url+"?"+requestParam+"="+value+"&id="+parentId;
 			}
-			
-			$.ajax({
-				url: url,
-				type: method,
-				success: function(data) {
-					if (parentId && parentId !== "") {
-						$("#"+parentId).replaceWith(data);
-					}
-				},
-				error: function(data) {
-					createGlobalErrorMessage(data);
-				}
-			});
+
+			if (!newLocation) {
+			    newLocation = "false";
+			}
+
+			if (newLocation === "false") {
+			    $.ajax({
+                    url: url,
+                    type: method,
+                    success: function(data) {
+                        if (parentId && parentId !== "") {
+                            $("#"+parentId).replaceWith(data);
+                        }
+                    },
+                    error: function(data) {
+                        createGlobalErrorMessage(data);
+                    }
+                });
+			} else {
+			    location.href = url;
+			}
 		});
 	});
 }

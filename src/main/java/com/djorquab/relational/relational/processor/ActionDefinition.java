@@ -16,4 +16,5 @@ public @interface ActionDefinition {
 	String path() default "";
 	String requestParam() default "";
 	String method() default "";
+	boolean newLocation() default false;
 }

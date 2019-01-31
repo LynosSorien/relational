@@ -16,7 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonForm implements Serializable {
 	private static final long serialVersionUID = -5241309306612469463L;
-	
+
+	@FormField(label = "ID", hidden = true)
+	private Long id;
+
 	@FormField(label = "Name", type = FieldType.TEXT, position = 0, colspan = 6)
 	private String name;
 	

@@ -32,6 +32,7 @@
 								th:action-request-param="${action['requestParam']}"
 								th:action-method="${action.method}"
 								th:parent-id="${id != null ? id : 'paged-table'}"
+								th:new-location="${action['newLocation']}"
 								class="custom-action btn btn-danger">Delete</button>
 						</div>
 						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).EDIT}">
@@ -42,6 +43,7 @@
 									th:action-request-param="${action['requestParam']}"
 									th:action-method="${action.method}"
 									th:parent-id="${id != null ? id : 'paged-table'}"
+									th:new-location="${action['newLocation']}"
 									class="custom-action btn btn-warning">Edit</button>
 						</div>
 					</td>

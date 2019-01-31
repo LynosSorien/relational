@@ -23,6 +23,7 @@ public class FormProcessor extends Processor<FormDefinition, FormField> {
 					.position(annotation.position())
 					.type(annotation.type())
 					.label(annotation.label())
+					.hidden(annotation.hidden())
 					.build()
 		);
 		return instance;

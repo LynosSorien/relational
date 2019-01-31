@@ -6,23 +6,26 @@
 	>
 		<div class="row">
 			<th:foreach th:remove="tag" th:each="field : ${form.fields}">
-				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).TEXT && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
-					<input th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
+					<input th:value="${object != null ? object[field.variable] : ''}" th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
 				</div>
-				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
-					<textarea rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"></textarea>
+					<textarea th:value="${object != null ? object[field.variable] : ''}" rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}">[[${object != null ? object[field.variable] : ''}]]</textarea>
 				</div>
-				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DATE}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DATE && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
 					<div class="input-group date datepicker">
-						<input data-date-format="dd/mm/yyyy" th:id="${field.variable}" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
+						<input th:value="${object[field['variable']]}" data-date-format="yyyy-mm-dd" th:id="${field.variable}" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}"/>
 						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
 					</div>
 					<!--<input data-date-format="dd/mm/yyyy HH:MM" th:id="${field.variable}" th:class="@{'form-control form-item datepicker'}" th:variable="${field.variable}" th:submit="${true}"/>-->
+				</div>
+				<div th:if="${field.hidden}" style="display:none!important;">
+					<input th:value="${object != null ? object[field.variable] : ''}" th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}" style="display:none!important;"/>
 				</div>
 			</th:foreach>
 		</div>

@@ -11,7 +11,7 @@
 	        class="row">
 	     	<h1>Create</h1>
 	     	<div th:remove="tag" th:include="fragments/forms :: simpleCreationForm"
-	     		th:with="form=${formDefinition}, formClass=jumbotron" ></div>
+	     		th:with="form=${formDefinition}, formClass=jumbotron, object=${person}" ></div>
       	</div>
 	</body>
 </html>
