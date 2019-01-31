@@ -29,5 +29,46 @@ function scanTables() {
 				});
 			});
 		});
+		scanTableLinks(table);
 	});
+}
+
+function scanTableLinks(table) {
+    table.find(".table-link").each(function() {
+        let currentLink = $(this);
+        let linkClass = currentLink.attr("class");
+        let link = currentLink.attr("link");
+        let withPathVariable = currentLink.attr("with-path-variable");
+        if (!withPathVariable) {
+            withPathVariable = "false";
+        }
+        let type = currentLink.attr("type");
+        let value = currentLink.attr("value");
+
+        if (withPathVariable === "true") {
+            if (link.substr(-1) !== '/') {
+                link = link + '/';
+            }
+            link = link + value;
+        }
+        currentLink.attr("class", linkClass+' '+getClassAssociatedToLinkType(type));
+        currentLink.click(function() {
+            location.href = link;
+        });
+    });
+}
+
+function getClassAssociatedToLinkType(type) {
+    if (type === 'BUTTON') {
+        return 'btn';
+    } else if (type === 'INFO_BUTTON') {
+        return 'btn btn-info';
+    } else if (type === 'DELETE_BUTTON') {
+        return 'btn btn-danger';
+    } else if (type === 'WARNING_BUTTON') {
+        return 'btn btn-warning';
+    } else if (type === 'SUCCESS_BUTTON') {
+        return 'btn btn-success';
+    }
+    return '';
 }

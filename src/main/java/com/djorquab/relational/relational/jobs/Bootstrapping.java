@@ -71,6 +71,8 @@ public class Bootstrapping {
 
 	private void populatePeople() {
 		peopleService.save(createPerson("Claire", "Farron", "http://pm1.narvii.com/6366/4eb03447499b4c297bf995782545f1621041f909_00.jpg", "Main character of FFXIII series", null, null));
+		peopleService.save(createPerson("Link", null, "https://i.kym-cdn.com/photos/images/facebook/001/278/235/d9c.jpg", "Playable character of The legend of Zelda series", null, null));
+
 	}
 
 	private PersonBO createPerson(String name, String surname, String image, String description, Date birth, Date death) {

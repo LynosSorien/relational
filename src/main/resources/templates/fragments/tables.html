@@ -9,7 +9,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="element : ${elements}">
+				<tr th:each="element, iter : ${elements}" th:class="${iter.index%2 == 1 ? 'table-secondary' : ''}">
 					<td th:each="column : ${definition['columns']}">
 						<div th:remove="tag" th:if="${column.withLink}">
 							<a class="table-link" th:link="${column.link}" th:with-path-variable="${column.pathVariable}"
