@@ -2,7 +2,7 @@ package com.djorquab.relational.relational.web.api;
 
 import com.djorquab.relational.relational.bo.PersonBO;
 import com.djorquab.relational.relational.commons.ResponseDTO;
-import com.djorquab.relational.relational.services.PeopleService;
+import com.djorquab.relational.relational.managers.PeopleManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.io.Serializable;
 @RequestMapping("/api/people")
 public class PeopleApiController {
     @Autowired
-    private PeopleService service;
+    private PeopleManager manager;
 
     @PostMapping
     public ResponseEntity<ResponseDTO<Serializable>> create(@RequestBody PersonBO person) {
         try {
-            service.save(person);
+            manager.create(person);
             return ResponseEntity.ok(ResponseDTO.builder().message("Entity added").build());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

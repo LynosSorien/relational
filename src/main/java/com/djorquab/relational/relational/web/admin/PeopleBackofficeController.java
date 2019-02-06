@@ -1,5 +1,6 @@
 package com.djorquab.relational.relational.web.admin;
 
+import com.djorquab.relational.relational.managers.PeopleManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +18,14 @@ import com.djorquab.relational.relational.utils.BackofficeUtils;
 @Slf4j
 public class PeopleBackofficeController {
 	@Autowired
+	private PeopleManager manager;
+
+	@Autowired
 	private PeopleService service;
 
 	@PostMapping
 	public ModelAndView createPerson(@ModelAttribute(BackofficeConstants.FORM_OBJECT) PersonBO person) {
-		service.save(person);
+		manager.create(person);
 		return people("The request has processed correctly");
 	}
 	
@@ -67,7 +71,7 @@ public class PeopleBackofficeController {
 
 	@DeleteMapping
 	public ModelAndView remove(@RequestParam("personId") Long personId, @RequestParam(name = "id", required = false) String htmlId) {
-		service.delete(personId);
+		manager.delete(personId);
 		return paging(1, 10, htmlId);
 	}
 

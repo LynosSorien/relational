@@ -3,6 +3,7 @@ package com.djorquab.relational.relational.jobs;
 import javax.annotation.PostConstruct;
 
 import com.djorquab.relational.relational.bo.PersonBO;
+import com.djorquab.relational.relational.managers.PeopleManager;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.utils.Utils;
 import lombok.Getter;
@@ -36,7 +37,7 @@ public class Bootstrapping {
 	private RelationNameService relationNameService;
 
 	@Autowired
-	private PeopleService peopleService;
+	private PeopleManager peopleManager;
 	
 	@PostConstruct
 	public void init() {
@@ -75,9 +76,9 @@ public class Bootstrapping {
 	}
 
 	private void populatePeople() {
-		peopleService.save(createPerson("Claire", "Farron", "http://pm1.narvii.com/6366/4eb03447499b4c297bf995782545f1621041f909_00.jpg", "Main character of FFXIII series, main part of Fabula Nova Crysalia", null, null));
-		peopleService.save(createPerson("Link", null, "https://i.kym-cdn.com/photos/images/facebook/001/278/235/d9c.jpg", "Playable character of The legend of Zelda series", null, null));
-		peopleService.save(createPerson("Mr. X", null, "https://crossfitarmoury.com/wp-content/uploads/2012/10/random-dog.jpg", "A dog hero", dateFromString("2019-01-05"), null));
+		peopleManager.create(createPerson("Claire", "Farron", "http://pm1.narvii.com/6366/4eb03447499b4c297bf995782545f1621041f909_00.jpg", "Main character of FFXIII series, main part of Fabula Nova Crysalia", null, null));
+		peopleManager.create(createPerson("Link", null, "https://i.kym-cdn.com/photos/images/facebook/001/278/235/d9c.jpg", "Playable character of The legend of Zelda series", null, null));
+		peopleManager.create(createPerson("Mr. X", null, "https://crossfitarmoury.com/wp-content/uploads/2012/10/random-dog.jpg", "A dog hero", dateFromString("2019-01-05"), null));
 	}
 
 	private PersonBO createPerson(String name, String surname, String image, String description, Date birth, Date death) {

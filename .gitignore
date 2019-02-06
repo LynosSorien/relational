@@ -34,3 +34,6 @@ RemoteSystemsTempFiles/
 /target/
 
 .settings
+
+./application
+./application/*

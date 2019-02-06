@@ -1,15 +1,9 @@
 package com.djorquab.relational.relational.config;
 
+import com.djorquab.relational.relational.mappers.*;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.djorquab.relational.relational.mappers.CountryMapper;
-import com.djorquab.relational.relational.mappers.PeopleRelationMapper;
-import com.djorquab.relational.relational.mappers.PersonMapper;
-import com.djorquab.relational.relational.mappers.RecordMapper;
-import com.djorquab.relational.relational.mappers.RelationNamesMapper;
-import com.djorquab.relational.relational.mappers.RolesMapper;
 
 @Configuration
 public class MappersConfig {

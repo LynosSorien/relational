@@ -46,6 +46,18 @@ public class PersonBO implements Serializable {
 	
 	private Date lastModified;
 	private Date createdOn;
+
+	@Builder.Default
+	private int tryTimes = 0;
+
+	public PersonBO initToJms() {
+		this.tryTimes = 0;
+		return this;
+	}
+	public PersonBO increaseTryTimes() {
+		this.tryTimes = this.tryTimes + 1;
+		return this;
+	}
 	
 	private List<PeopleRelationBO> peopleRelations;
 }
