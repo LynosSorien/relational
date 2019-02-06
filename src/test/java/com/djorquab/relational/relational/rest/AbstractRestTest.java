@@ -76,11 +76,19 @@ public abstract class AbstractRestTest extends AbstractTest {
 		return result;
 	}
 
+	public MvcResult post(HttpStatus expected, String path, Object requestBody, TestParam<?> ... params) {
+		return postWithModelAttribute(expected, path, requestBody, null, params);
+	}
+
 	public MvcResult post(String path, Object requestBody, TestParam<?> ... params) {
 		return postWithModelAttribute(path, requestBody, null, params);
 	}
 
 	public MvcResult postWithModelAttribute(String path, Object requestBody, Object modelAttribute, TestParam<?> ... params) {
+		return postWithModelAttribute(HttpStatus.OK, path, requestBody, modelAttribute, params);
+	}
+
+	public MvcResult postWithModelAttribute(HttpStatus expected, String path, Object requestBody, Object modelAttribute, TestParam<?> ... params) {
 		MvcResult result;
 		try {
 			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(path);
@@ -101,7 +109,7 @@ public abstract class AbstractRestTest extends AbstractTest {
 			throw new RuntimeException(e);
 		}
 
-		Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		Assert.assertEquals(expected.value(), result.getResponse().getStatus());
 		return result;
 	}
 	

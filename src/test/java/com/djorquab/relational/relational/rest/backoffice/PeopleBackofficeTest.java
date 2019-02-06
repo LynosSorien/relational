@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
@@ -76,6 +77,12 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 		Assert.assertEquals(claire.getName(), "Claire");
 		delete("/backoffice/people", new TestParam<>("personId", claire.getId()));
 		Assert.assertEquals(repository.count(), 0L);
+	}
+
+	@Test
+	@WithMockUser(username = "testing")
+	public void createExpectingError() {
+		post(HttpStatus.INTERNAL_SERVER_ERROR, "/api/people", PersonBO.builder().build());
 	}
 	
 }
