@@ -18,17 +18,18 @@ import lombok.Builder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@FormDef(method = "POST", submitLink = "/api/relation/names")
+@FormDef(submitLink = "/backoffice/relational/names")
 public class RelationNameBO implements Serializable {
 	private static final long serialVersionUID = 8823793833431291554L;
-	
+
+	@FormField(label = "ID", hidden = true)
 	@ViewColumn(header = "ID",
 			actions = {
 					//@ActionDefinition(active = true, type = ActionType.EDIT, pathVariable = true, path = "/backoffice/relational/names/edit", method = "GET"),
 					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/relational/names", requestParam = "relationId")
 			}
 	)
-	@FormField(label = "ID", hidden = true)
+	//@FormField(label = "ID", hidden = true)
 	private Long id;
 	@ViewColumn(header = "Name")
 	@FormField(label="Name")

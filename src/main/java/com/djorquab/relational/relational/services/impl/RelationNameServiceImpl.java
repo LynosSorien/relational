@@ -18,7 +18,12 @@ public class RelationNameServiceImpl
 	public RelationNameServiceImpl(@Autowired RelationNamesMapper mapper, @Autowired RelationNamesRepository repository) {
 		super(mapper, repository);
 	}
-	
+
+	@Override
+	public RelationNameBO getByName(String name) {
+		return getMapper().entityToDto(getRepository().findByName(name));
+	}
+
 	@Override
 	public boolean existsRelationWithName(String name) {
 		return getRepository().existsByName(name);

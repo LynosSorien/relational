@@ -7,4 +7,5 @@ import com.djorquab.relational.relational.repositories.RelationNamesRepository;
 
 public interface RelationNameService extends AbstractEntityService<RelationName, Long, RelationNameBO, RelationNamesMapper, RelationNamesRepository> {
 	boolean existsRelationWithName(String name);
+	RelationNameBO getByName(String name);
 }

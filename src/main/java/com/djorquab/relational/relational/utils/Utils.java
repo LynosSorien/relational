@@ -20,7 +20,7 @@ public class Utils {
 			log.debug("Current params {} : Size {}", objects, objects.length);
 			params = new HashMap<>();
 			for (int i = 0; i < objects.length - 1; i = i + 1) {
-				params.put(objects[i] != null ? objects[i].toString() : null, objects[i + 1]);
+				params.put(objects[i] != null ? objects[i].toString() : "null", objects[i + 1]);
 			}
 		}
 		return params;

@@ -33,7 +33,7 @@ public class BackofficeUtils {
 		}
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		UserDetails authUser = null;
-		if (principal != null && principal instanceof UserDetails) {
+		if (principal instanceof UserDetails) {
 			authUser = (UserDetails) principal;
 		}
 		mapParams.put("user", UserDTO.builder().username(authUser != null ? authUser.getUsername() : "Guest").build());
@@ -61,6 +61,7 @@ public class BackofficeUtils {
 		mapParams.put("tableDefinition", Processors.tableDefinitionInstance().process(tableClass));
 		mapParams.put("formDefinition", Processors.formProcessorInstance().process(formClass));
 		log.debug("Map params {}", mapParams);
+		log.debug("Form entity {} - {}", mapParams.containsKey(BackofficeConstants.FORM_OBJECT), mapParams.get(BackofficeConstants.FORM_OBJECT));
 		return new ModelAndView(template,
 				mapParams);
 	}

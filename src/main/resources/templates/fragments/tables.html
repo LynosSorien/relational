@@ -52,8 +52,8 @@
 		</table>
 		<div class="paged-table-pagination">
 			<ul class="pagination">
-				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence(1, numberOfPages != null ? numberOfPages : 1)}">
-					<li><a th:page="${i}" th:class="@{'page-link '+${(i-1) == page ? 'active' : 'link-usable'}}" th:utext="${i}"></a></li>
+				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence((page > 2 ? page-2 : 1), numberOfPages != null ? numberOfPages : 1)}">
+					<li><a th:max-pages="${numberOfPages}" th:page="${i}" th:class="@{'page-link '+${(i-1) == page ? 'active' : 'link-usable'}}" th:text="${i}"></a></li>
 				</th:foreach>
 			</ul>
 		</div>

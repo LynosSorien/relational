@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@FormDef(submitButtonLabel = "Create", submitLink = "/api/people", navigateTo = "/backoffice/people")
+@FormDef(submitButtonLabel = "Create", submitLink = "/backoffice/people", navigateTo = "/backoffice/people")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

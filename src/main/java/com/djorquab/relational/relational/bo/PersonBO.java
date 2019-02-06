@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @NoArgsConstructor
@@ -34,8 +35,10 @@ public class PersonBO implements Serializable {
 	private String surname;
 	private String description;
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	@JsonFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deathdate;
 
 	@ViewColumn(header = "Image", position = 3, type = ColumnType.IMAGE)

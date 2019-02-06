@@ -1,5 +1,6 @@
 package com.djorquab.relational.relational.rest;
 
+import com.djorquab.relational.relational.BackofficeConstants;
 import org.junit.Assert;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +77,18 @@ public abstract class AbstractRestTest extends AbstractTest {
 	}
 
 	public MvcResult post(String path, Object requestBody, TestParam<?> ... params) {
+		return postWithModelAttribute(path, requestBody, null, params);
+	}
+
+	public MvcResult postWithModelAttribute(String path, Object requestBody, Object modelAttribute, TestParam<?> ... params) {
 		MvcResult result;
 		try {
 			MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(path);
 			if (requestBody != null) {
 				builder = builder.contentType(MediaType.APPLICATION_JSON).content(toJson(requestBody));
+			}
+			if (modelAttribute != null) {
+				builder.flashAttr(BackofficeConstants.FORM_OBJECT, modelAttribute);
 			}
 			if (params != null) {
 				for (TestParam<?> param : params) {

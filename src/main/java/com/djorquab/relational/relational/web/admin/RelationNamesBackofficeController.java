@@ -3,11 +3,7 @@ package com.djorquab.relational.relational.web.admin;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.djorquab.relational.relational.BackofficeConstants;
@@ -24,10 +20,14 @@ public class RelationNamesBackofficeController {
 	private RelationNameService service;
 	
 	@GetMapping
-	public ModelAndView relationalNames() {
+	public ModelAndView relationalNames(String success, String error) {
 		PagedResult<RelationNameBO> result = service.findAllPaged(0, 10);
-		log.info("Relation names found {}", result);
-		return BackofficeUtils.createModelAndViewWithTableDefinitionAndForm("config/relationalNames", RelationNameBO.class, RelationNameBO.class, "tableResult", result);
+		log.debug("Relation names found {}", result);
+		return BackofficeUtils.createModelAndViewWithTableDefinitionAndForm("config/relationalNames", RelationNameBO.class, RelationNameBO.class,
+				"tableResult", result,
+				BackofficeConstants.FORM_OBJECT, RelationNameBO.builder().build(),
+				BackofficeConstants.GLOBAL_SUCCESS_MESSAGE, success,
+				BackofficeConstants.GLOBAL_ERROR_MESSAGE, error);
 	}
 	
 	@GetMapping("/paging")
@@ -41,6 +41,18 @@ public class RelationNamesBackofficeController {
 				"pagedEndpoint", "/backoffice/relational/names/paging",
 				"tableResult", result,
 				BackofficeConstants.ID, id);
+	}
+
+	@PostMapping
+	public ModelAndView create(@ModelAttribute(BackofficeConstants.FORM_OBJECT) RelationNameBO relationName) {
+		log.info("Adding new relation... {}", relationName);
+		relationName.setName(relationName.getName().trim());
+		if (!service.existsRelationWithName(relationName.getName())) {
+			service.save(relationName);
+			return relationalNames("The relation has been added correctly", null);
+		} else {
+			return relationalNames(null, "The relation already exists!");
+		}
 	}
 	
 	@DeleteMapping

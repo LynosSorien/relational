@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
     <head>
@@ -10,11 +9,11 @@
 	    <div layout:fragment="content"
 	        class="row">
 	     	<h1>Relational Names</h1>
-	     	<div th:remove="tag" th:include="fragments/tables :: pagedTable" 
-	     		th:with="id='relational-table', pagedEndpoint='/backoffice/relational/names/paging', definition=${tableDefinition}, elements=${tableResult['elements']}, page=${tableResult['page']}, size=${tableResult['pageSize']}, pages=${tableResult['numberOfPages']}"></div>
-	     	<h1>Create new relation</h1>
+			<div th:remove="tag" th:include="fragments/tables :: pagedTable"
+				 th:with="id='relational-table', pagedEndpoint='/backoffice/relational/names/paging', definition=${tableDefinition}, elements=${tableResult.elements}, page=${tableResult.page}, size=${tableResult.pageSize}, numberOfPages=${tableResult.numberOfPages}"></div>
+			<h1>Create new relation</h1>
 	     	<div th:remove="tag" th:include="fragments/forms :: simpleCreationForm"
-	     		th:with="form=${formDefinition}, callbacks='relational-table', callbackTypes='list', callbackUrls='/backoffice/relational/names/paging?id=relational-table', formClass=jumbotron" ></div>
+	     		th:with="form=${formDefinition}, callbacks='relational-table', callbackTypes='list', callbackUrls='/backoffice/relational/names/paging?id=relational-table', formClass=jumbotron, formEntity=${formEntity}" ></div>
       	</div>
 	</body>
 </html>

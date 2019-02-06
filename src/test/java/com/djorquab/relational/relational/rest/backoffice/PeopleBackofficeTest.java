@@ -57,6 +57,17 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 
 	@Test
 	@WithMockUser(username = "testing")
+	public void createUserUsingBackoffice() {
+		postWithModelAttribute("/backoffice/people", null,
+				PersonBO.builder().name("Claire").surname("Farron").birthday(Calendar.getInstance().getTime()).deathdate(Calendar.getInstance().getTime()).description("LORE IPSUM").build());
+		Assert.assertEquals(repository.count(), 1L);
+		List<PersonBO> persons = service.findAll();
+		PersonBO claire = persons.get(0);
+		Assert.assertEquals(claire.getName(), "Claire");
+	}
+
+	@Test
+	@WithMockUser(username = "testing")
 	public void createAndDeleteUser() {
 		post("/api/people", PersonBO.builder().name("Claire").surname("Farron").birthday(Calendar.getInstance().getTime()).deathdate(Calendar.getInstance().getTime()).description("LORE IPSUM").build());
 		Assert.assertEquals(repository.count(), 1L);
