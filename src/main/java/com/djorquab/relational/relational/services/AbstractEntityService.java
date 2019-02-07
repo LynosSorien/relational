@@ -20,4 +20,6 @@ public interface AbstractEntityService<E extends AbstractEntity, K extends Seria
 	List<BO> findAll();
 	
 	PagedResult<BO> findAllPaged(int page, int pageSize);
+
+	long count();
 }

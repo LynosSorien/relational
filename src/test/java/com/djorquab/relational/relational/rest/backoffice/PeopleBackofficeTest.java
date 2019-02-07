@@ -50,7 +50,7 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 	@WithMockUser(username = "testing")
 	public void createUser() {
 		post("/api/people", PersonBO.builder().name("Claire").surname("Farron").birthday(Calendar.getInstance().getTime()).deathdate(Calendar.getInstance().getTime()).description("LORE IPSUM").build());
-		Assert.assertEquals(repository.count(), 1L);
+		Assert.assertEquals(service.count(), 1L);
 		List<PersonBO> persons = service.findAll();
 		PersonBO claire = persons.get(0);
 		Assert.assertEquals(claire.getName(), "Claire");
@@ -61,7 +61,7 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 	public void createUserUsingBackoffice() {
 		postWithModelAttribute("/backoffice/people", null,
 				PersonBO.builder().name("Claire").surname("Farron").birthday(Calendar.getInstance().getTime()).deathdate(Calendar.getInstance().getTime()).description("LORE IPSUM").build());
-		Assert.assertEquals(repository.count(), 1L);
+		Assert.assertEquals(service.count(), 1L);
 		List<PersonBO> persons = service.findAll();
 		PersonBO claire = persons.get(0);
 		Assert.assertEquals(claire.getName(), "Claire");
@@ -71,12 +71,12 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 	@WithMockUser(username = "testing")
 	public void createAndDeleteUser() {
 		post("/api/people", PersonBO.builder().name("Claire").surname("Farron").birthday(Calendar.getInstance().getTime()).deathdate(Calendar.getInstance().getTime()).description("LORE IPSUM").build());
-		Assert.assertEquals(repository.count(), 1L);
+		Assert.assertEquals(1L, service.count());
 		List<PersonBO> persons = service.findAll();
 		PersonBO claire = persons.get(0);
 		Assert.assertEquals(claire.getName(), "Claire");
 		delete("/backoffice/people", new TestParam<>("personId", claire.getId()));
-		Assert.assertEquals(repository.count(), 0L);
+		Assert.assertEquals(0L, service.count());
 	}
 
 	@Test

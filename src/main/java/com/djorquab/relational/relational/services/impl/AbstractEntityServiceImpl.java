@@ -76,7 +76,12 @@ public abstract class AbstractEntityServiceImpl<E extends AbstractEntity, K exte
 		Page<E> pageEntity = repository.findAll(pageable);
 		return transform(pageEntity, page, pageSize);
 	}
-	
+
+	@Override
+	public long count() {
+		return getRepository().count();
+	}
+
 	private PagedResult<D> transform(Page<E> page, int currentPage, int pageSize) {
 		PagedResult<D> result = new PagedResult<>();
 		result.setPage(currentPage);

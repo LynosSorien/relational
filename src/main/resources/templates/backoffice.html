@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorate="layout">
     <head>
@@ -11,6 +10,30 @@
 	        class="row">
 	     	<h1>Backoffice</h1>
 	     	<p>Use navbar to navigate by the site</p>
+
+			<h3>Resume</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Info</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="/backoffice/admin/jms">JMS Errors</a></td>
+						<td th:text="${jmsErrors}"></td>
+					</tr>
+					<tr>
+						<td>Relation names count</td>
+						<td th:text="${relationNamesCount}"></td>
+					</tr>
+					<tr>
+						<td>People count</td>
+						<td th:text="${peopleCount}"></td>
+					</tr>
+				</tbody>
+			</table>
       	</div>
 	</body>
 </html>

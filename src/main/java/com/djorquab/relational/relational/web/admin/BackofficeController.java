@@ -1,5 +1,7 @@
 package com.djorquab.relational.relational.web.admin;
 
+import com.djorquab.relational.relational.services.ErrorJMSService;
+import com.djorquab.relational.relational.services.PeopleService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +23,20 @@ import com.djorquab.relational.relational.utils.Utils;
 @Slf4j
 @SuppressWarnings("unused")
 public class BackofficeController {
-	
+	@Autowired
+	private ErrorJMSService errorJMSService;
+
+	@Autowired
+	private PeopleService peopleService;
+
+	@Autowired
+	private RelationNameService relationNameService;
+
 	@GetMapping
 	public ModelAndView backoffice() {
-		return BackofficeUtils.createModelAndView("backoffice");
+		return BackofficeUtils.createModelAndView("backoffice",
+				"jmsErrors", errorJMSService.count(),
+				"relationNamesCount", relationNameService.count(),
+				"peopleCount", peopleService.count());
 	}
 }
