@@ -135,5 +135,23 @@ public class AdminTest extends AbstractRestTest {
         Assert.assertEquals(1L, errorJMSRepository.count());
 
         delete("/backoffice/admin/jms/error", new TestParam<>("errorId", errorJMSRepository.findAll().iterator().next().getId()));
+
+        Assert.assertEquals(0L, errorJMSRepository.count());
+    }
+
+    @Test
+    public void failJms() {
+        Assert.assertEquals(0L, errorJMSRepository.count());
+
+        PersonBO captainAmerica = peopleManager.create(PersonBO.builder().name("Steve").surname("Rogers").build());
+        sleep();
+
+        peopleManager.delete(captainAmerica.getId());
+        sleep();
+        Assert.assertEquals(0L, errorJMSRepository.count());
+
+        storeService.deleteStoreForPerson(captainAmerica);
+        sleep();
+        Assert.assertEquals(1L, errorJMSRepository.count());
     }
 }
