@@ -1,5 +1,5 @@
 package com.djorquab.relational.relational.commons;
 
-public enum ActionType {
-	DELETE, EDIT, VIEW, DO
+public enum JMSSystem {
+    PEOPLE
 }

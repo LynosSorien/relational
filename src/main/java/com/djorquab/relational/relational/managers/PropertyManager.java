@@ -14,4 +14,8 @@ public class PropertyManager implements Serializable {
 	@Value("${bootstrapping:false}")
 	@Getter
 	private boolean bootstrapping;
+
+	@Value("${storage.folder.name}")
+	@Getter
+	private String folderStorage;
 }

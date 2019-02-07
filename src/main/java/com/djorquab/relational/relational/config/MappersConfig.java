@@ -37,4 +37,9 @@ public class MappersConfig {
 	public PeopleRelationMapper peopleRelationMapper() {
 		return Mappers.getMapper(PeopleRelationMapper.class);
 	}
+
+	@Bean
+	public ErrorJMSMapper errorJMSMapper() {
+		return Mappers.getMapper(ErrorJMSMapper.class);
+	}
 }

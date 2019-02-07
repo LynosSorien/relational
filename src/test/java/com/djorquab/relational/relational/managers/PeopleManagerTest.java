@@ -22,6 +22,9 @@ public class PeopleManagerTest extends AbstractTest {
 	
 	@Autowired
 	private PeopleManager manager;
+
+	@Autowired
+	private PeopleService service;
 	
 	private PersonBO create(String name, String surname) {
 		return PersonBO.builder()
@@ -38,6 +41,9 @@ public class PeopleManagerTest extends AbstractTest {
 	@Test
 	public void createAndDelete() {
 		PersonBO person = manager.create(create("Tony", "Stark"));
+		Assert.assertNotNull(person.getId());
 		manager.delete(person);
+		person = service.getById(person.getId());
+		Assert.assertNull(person);
 	}
 }

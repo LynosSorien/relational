@@ -37,3 +37,7 @@ RemoteSystemsTempFiles/
 
 ./application
 ./application/*
+./relationalApp
+./relationalApp/*
+./relationalAppTest
+./relationalAppTest/*

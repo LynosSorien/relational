@@ -10,7 +10,7 @@ import com.djorquab.relational.relational.commons.ActionType;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ActionDefinition {
-	boolean active() default false;
+	boolean active() default true;
 	ActionType type() default ActionType.DELETE;
 	boolean pathVariable() default false;
 	String path() default "";

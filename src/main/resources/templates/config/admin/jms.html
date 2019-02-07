@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layout">
+    <head>
+        <title>JMS :: Errors</title>
+    </head>
+    <body>
+	    <div layout:fragment="content"
+	        class="row">
+	     	<h1>JMS Errors</h1>
+	     	<div th:remove="tag" th:include="fragments/tables :: pagedTable" 
+	     		th:with="id='relational-table', pagedEndpoint='/backoffice/admin/jms/paging', definition=${tableDefinition}, elements=${tableResult['elements']}, page=${tableResult['page']}, size=${tableResult['pageSize']}, numberOfPages=${tableResult['numberOfPages']}, formEntity=${formEntity}"></div>
+      	</div>
+	</body>
+</html>

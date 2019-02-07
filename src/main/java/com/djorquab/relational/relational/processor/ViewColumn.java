@@ -18,5 +18,5 @@ public @interface ViewColumn {
 	boolean pathVariable() default false;
 	int position() default -1;
 	ColumnType type() default ColumnType.TEXT;
-	ActionDefinition[] actions() default {};//@ActionDefinition(active = false);
+	ActionDefinition[] actions() default {};
 }
