@@ -6,6 +6,8 @@ import com.djorquab.relational.relational.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class PeopleManager {
     @Autowired
@@ -29,5 +31,12 @@ public class PeopleManager {
 
     public void delete(Long id) {
         delete(peopleService.getById(id));
+    }
+
+    public void deleteAll() {
+        List<PersonBO> people = peopleService.findAll();
+        for (PersonBO person : people) {
+            delete(person);
+        }
     }
 }

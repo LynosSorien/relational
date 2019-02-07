@@ -19,13 +19,8 @@ public class FolderJMS {
     public void createPersonFolder(PersonBO person) {
         log.info("New Person received into JMS, creating directory {}", person);
         if (person.getId() != null && person.getTryTimes() < 10) {
-            try {
-                if (!new File("application/person" + person.getId()).mkdirs()) {
-                    log.error("Direciton is not created!");
-                    jmsTemplate.convertAndSend("peopleJMS", person.increaseTryTimes());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!new File("application/person" + person.getId()).mkdirs()) {
+                log.error("Direciton is not created!");
                 jmsTemplate.convertAndSend("peopleJMS", person.increaseTryTimes());
             }
         }
@@ -35,13 +30,8 @@ public class FolderJMS {
     public void removePersonFolder(PersonBO person) {
         log.info("Remove Person received into JMS, creating directory {}", person);
         if (person.getId() != null && person.getTryTimes() < 10) {
-            try {
-                if (!new File("application/person" + person.getId()).delete()) {
-                    log.error("Direciton is not removed!");
-                    jmsTemplate.convertAndSend("peopleJMS", person.increaseTryTimes());
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (!new File("application/person" + person.getId()).delete()) {
+                log.error("Direciton is not removed!");
                 jmsTemplate.convertAndSend("peopleJMS", person.increaseTryTimes());
             }
         }
