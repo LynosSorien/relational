@@ -22,7 +22,7 @@
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
 					<div class="input-group date datepicker">
 						<input th:value="${object[field['variable']]}" data-date-format="yyyy-mm-dd" th:id="${field.variable}" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:name="${field.variable != null ? field.variable : 'var'}" th:submit="${true}"/>
-						<div class="input-group-addon"
+						<div class="input-group-addon">
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
 					</div>
