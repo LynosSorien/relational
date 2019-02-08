@@ -43,7 +43,7 @@ public class Bootstrapping {
 	public void init() {
 		if (propertyManager.isBootstrapping()) {
 			putUsers();
-			putRelations();
+            putRelations();
 			populatePeople();
 		}
 	}

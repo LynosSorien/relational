@@ -22,6 +22,7 @@
 		<jquery.version>2.1.4</jquery.version>
 		<jacoco.version>0.8.2</jacoco.version>
 		<datepicker.version>1.8.0</datepicker.version>
+		<dropzone.version>5.5.0</dropzone.version>
 	</properties>
 
 	<dependencies>
@@ -103,6 +104,11 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap-datepicker</artifactId>
 			<version>${datepicker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>dropzone</artifactId>
+			<version>${dropzone.version}</version>
 		</dependency>
 
 		<dependency>

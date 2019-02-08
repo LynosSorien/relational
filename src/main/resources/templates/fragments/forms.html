@@ -1,5 +1,5 @@
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="simpleCreationForm">
-	<form th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}"
+	<form th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms dropzone ' + ${formClass != null ? formClass : ''}}"
 		th:link="${form['submitLink']}" th:method="${form['method']}" th:navigate-to="${form.navigateTo}" th:action="${form['submitLink']}"
 		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}"
 		th:object="${formEntity}"
@@ -10,6 +10,10 @@
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
 					<input th:value="${object != null ? object[field.variable] : ''}" th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}" th:name="${field.variable != null ? field.variable : 'var'}"/>
 				</div>
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).IMAGE && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+					<label th:for="${field.variable}" th:text="${field.label}"></label>
+					<input th:value="${object != null ? object[field.variable] : ''}" th:id="${field.variable}" type="file" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:submit="${true}" th:name="${field.variable != null ? field.variable : 'var'}" multiple/>
+				</div>
 				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).DESCRIPTION && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
 					<textarea th:value="${object != null ? object[field.variable] : ''}" rows="4" cols="50" th:id="${field.variable}" type="textarea" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:name="${field.variable != null ? field.variable : 'var'}" th:submit="${true}">[[${object != null ? object[field.variable] : ''}]]</textarea>
@@ -18,7 +22,7 @@
 					<label th:for="${field.variable}" th:text="${field.label}"></label>
 					<div class="input-group date datepicker">
 						<input th:value="${object[field['variable']]}" data-date-format="yyyy-mm-dd" th:id="${field.variable}" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:name="${field.variable != null ? field.variable : 'var'}" th:submit="${true}"/>
-						<div class="input-group-addon">
+						<div class="input-group-addon"
 							<span class="glyphicon glyphicon-th"></span>
 						</div>
 					</div>
@@ -29,5 +33,20 @@
 			</th:foreach>
 		</div>
 		<button class="custom-submit-button btn btn-info">[[${form['submitButtonLabel']}]]</button>
+	</form>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="assetsUploadForm">
+	<form th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'assets-upload-form custom-forms dropzone ' + ${formClass != null ? formClass : ''}}"
+		  th:method="${form['method']}" th:action="${form['submitLink']}"
+	>
+		<div class="row">
+			<th:foreach th:remove="tag" th:each="field : ${form.fields}">
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).IMAGE && !field.hidden}" th:class="@{'form-group col-sm-'+${field.colspan}}">
+					<label th:for="${field.variable}" th:text="${field.label}"></label>
+					<input th:id="${field.variable}" type="file" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:name="${field.variable != null ? field.variable : 'var'}" multiple/>
+				</div>
+			</th:foreach>
+		</div>
 	</form>
 </div>
