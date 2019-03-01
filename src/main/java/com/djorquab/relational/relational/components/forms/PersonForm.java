@@ -1,4 +1,4 @@
-package com.djorquab.relational.relational.forms;
+package com.djorquab.relational.relational.components.forms;
 
 import java.io.Serializable;
 import java.util.Date;

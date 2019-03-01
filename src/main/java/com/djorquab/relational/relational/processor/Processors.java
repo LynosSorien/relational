@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 public class Processors {
 	private static TableDefinitionProcessor tableDefinitionProcessor;
 	private static FormProcessor formProcessor;
+	private static FilterProcessor filterProcessor;
 	private static final String LOCK = "PROCESSOR-LOCK";
 	
 	public static TableDefinitionProcessor tableDefinitionInstance() {
@@ -19,7 +20,7 @@ public class Processors {
 		}
 		return tableDefinitionProcessor;
 	}
-	
+
 	public static FormProcessor formProcessorInstance() {
 		if (formProcessor == null) {
 			synchronized(LOCK) {
@@ -29,5 +30,16 @@ public class Processors {
 			}
 		}
 		return formProcessor;
+	}
+
+	public static FilterProcessor filterProcessorInstance() {
+		if (filterProcessor == null) {
+			synchronized(LOCK) {
+				if (filterProcessor == null) {
+					filterProcessor = new FilterProcessor();
+				}
+			}
+		}
+		return filterProcessor;
 	}
 }

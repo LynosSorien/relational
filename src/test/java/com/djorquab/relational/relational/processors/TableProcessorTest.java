@@ -1,5 +1,6 @@
-package com.djorquab.relational.relational;
+package com.djorquab.relational.relational.processors;
 
+import com.djorquab.relational.relational.AbstractTest;
 import lombok.Data;
 
 import org.junit.Assert;

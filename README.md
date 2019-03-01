@@ -60,4 +60,4 @@ Change **\<profile\>** by any usable profiles.
  - local
 
 ### Local
-The local profile use H2 database (hypersonic) and is used commontly for test and development (local). This makes easy to try the application because we don't need to configure any database and don't need to put any needed data to start to use it. It's because the bootstrapping at this profile is enabled and the default admin user is admin@test.com:test.
+The local profile use H2 database (hypersonic) and is used commontly for test and development (local). This makes easy to try the application because we don't need to configure any database and don't need to put any needed data to start to use it. It's because the bootstrapping at this profile is enabled and the default admin user is **admin@test.com:test**.

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.djorquab.relational.relational.BackofficeConstants;
 import com.djorquab.relational.relational.bo.PersonBO;
 import com.djorquab.relational.relational.commons.PagedResult;
-import com.djorquab.relational.relational.forms.PersonForm;
+import com.djorquab.relational.relational.components.forms.PersonForm;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.utils.BackofficeUtils;
 

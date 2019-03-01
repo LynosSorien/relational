@@ -1,0 +1,20 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="simpleSearcher">
+	<div class="popup-searcher-simple" th:search-link="${searchLink}" th:accept-link="${acceptLink}">
+		<div class="popup-searcher-simple-filters filters">
+			<div th:each="filter, iter : ${filters}">
+				<label th:for="@{'id-filter-' + ${iter}}">[[${filter.label}]]</label>
+				<input th:if="${filter.type !== 'select'}" th:id="@{'id-filter-' + ${iter}}" th:type="${filter.type}" th:attribute="${filter.attribute}" />
+				<select th:if="${filter.type === 'select'}" th:id="@{'id-filter-' + ${iter}}" th:attribute="${filter.attribute}" >
+					<option th:each="option : ${filter.options}">[[${option}]]</option>
+				</select>
+			</div>
+			<button class="search-button-searcher btn btn-info">Search</button>
+		</div>
+		<div class="popup-searcher-simple-table-results table-results">
+			<div th:remove="tag" th:include="fragments/tables :: pagedTable"
+				 th:with="id='popup-searcher-table', pagedEndpoint=${pagingEndpoint != null ? searchLink+'/paging' : pagingEndpoint}, definition=${tableDefinition}"></div>
+		</div>
+		<button class="accept-button-searcher btn btn-info">Accept</button>
+		<button class="cancel-button-searcher btn btn-danger">Cancel</button>
+	</div>
+</div>
