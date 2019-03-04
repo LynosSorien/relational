@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Utils {
 
-	public static final Map<String, Object> createParams(Object ... objects) {
+	public static Map<String, Object> createParams(Object ... objects) {
 		Map<String, Object> params = null;
 		if (objects != null) {
 			log.debug("Current params {} : Size {}", objects, objects.length);
@@ -26,7 +26,18 @@ public class Utils {
 		return params;
 	}
 
-	public static final Date dateFromString(String textDate, String pattern) throws ParseException {
+	public static Date dateFromString(String textDate, String pattern) throws ParseException {
 		return new SimpleDateFormat(pattern).parse(textDate);
+	}
+
+	public static boolean checkIfStringIsNull(String string) {
+		return string == null || "".equals(string.trim());
+	}
+
+	public static String toLikeFilter(String filter) {
+		if (filter != null) {
+			filter = "%"+filter+"%";
+		}
+		return filter;
 	}
 }

@@ -13,9 +13,9 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 public class PeopleSearcher implements Serializable {
-    @FieldFilter(label = "Name")
+    @FieldFilter(label = "Name", shown = true)
     private String name;
 
-    @FieldFilter(label = "Surname")
+    @FieldFilter(label = "Surname", shown = true)
     private String surname;
 }

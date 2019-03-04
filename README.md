@@ -27,6 +27,7 @@ Spring framework based application that contains REST-Service which communicates
  - JQuery
  - Thymeleaf templates
  - bootstrap-datepicker
+ - [DataTables](https://datatables.net/) 
 
 ## Project Structure
 - src/main/resources

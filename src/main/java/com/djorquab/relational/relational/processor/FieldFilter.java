@@ -12,4 +12,6 @@ public @interface FieldFilter {
     String variable() default "";
     String type() default "text";
     String[] options() default {};
+    boolean shown() default false;
+    boolean popup() default true;
 }

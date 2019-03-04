@@ -1,6 +1,7 @@
 package com.djorquab.relational.relational.processor;
 
 import com.djorquab.relational.relational.commons.Filter;
+import com.djorquab.relational.relational.commons.SearcherInfo;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
@@ -20,6 +21,8 @@ public class FilterProcessor extends Processor<List<Filter>, FieldFilter> {
                 .label(annotation.label())
                 .type(annotation.type())
                 .options(new LinkedList<>())
+                .shown(annotation.shown())
+                .popup(annotation.popup())
                 .build();
         if ("".equalsIgnoreCase(filter.getVariable())) {
             filter.setVariable(field.getName());
@@ -41,5 +44,15 @@ public class FilterProcessor extends Processor<List<Filter>, FieldFilter> {
     @Override
     protected List<Filter> getObjectInstance() {
         return new LinkedList<>();
+    }
+
+    public SearcherInfo extractInfo(FormField.Searcher searcher) {
+        return SearcherInfo.builder()
+                .filters(process(searcher.searcher()))
+                .acceptLink(searcher.acceptLink())
+                .searchLink(searcher.searchLink())
+                .paginationLink(searcher.paginationLink())
+                .tableDefinition(Processors.tableDefinitionInstance().process(searcher.tableDefinition()))
+                .build();
     }
 }

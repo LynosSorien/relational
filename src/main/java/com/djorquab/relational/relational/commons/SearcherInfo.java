@@ -9,14 +9,13 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Filter implements Serializable {
-    private String label;
-    private String type;
-    private String variable;
-    private boolean shown;
-    private boolean popup;
-    private List<?> options;
+public class SearcherInfo implements Serializable {
+    private List<Filter> filters;
+    private String acceptLink;
+    private String paginationLink;
+    private String searchLink;
+    private TableDefinition tableDefinition;
 }

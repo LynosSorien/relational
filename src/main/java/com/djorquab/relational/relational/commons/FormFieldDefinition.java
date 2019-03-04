@@ -1,6 +1,7 @@
 package com.djorquab.relational.relational.commons;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ public class FormFieldDefinition implements Comparable<FormFieldDefinition>, Ser
 	private String variable;
 	private String label;
 	private FieldType type;
+	private SearcherInfo searcherInfo;
 	private int position;
 	private int colspan;
 	

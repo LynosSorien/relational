@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import com.djorquab.relational.relational.commons.FieldType;
 import com.djorquab.relational.relational.commons.FormDefinition;
 import com.djorquab.relational.relational.commons.FormFieldDefinition;
 
@@ -16,16 +17,18 @@ public class FormProcessor extends Processor<FormDefinition, FormField> {
 		if (instance.getFields() == null) {
 			instance.setFields(new LinkedList<>());
 		}
-		instance.getFields().add(
-				FormFieldDefinition.builder()
-					.variable(field.getName())
-					.colspan(annotation.colspan())
-					.position(annotation.position())
-					.type(annotation.type())
-					.label(annotation.label())
-					.hidden(annotation.hidden())
-					.build()
-		);
+		FormFieldDefinition.FormFieldDefinitionBuilder builder = FormFieldDefinition.builder()
+				.variable(field.getName())
+				.colspan(annotation.colspan())
+				.position(annotation.position())
+				.type(annotation.type())
+				.label(annotation.label())
+				.hidden(annotation.hidden());
+		if (FieldType.RELATION.equals(annotation.type())) {
+			builder = builder.searcherInfo(Processors.filterProcessorInstance().extractInfo(annotation.searcher()));
+		}
+		instance.getFields().add(builder.build());
+
 		return instance;
 	}
 	

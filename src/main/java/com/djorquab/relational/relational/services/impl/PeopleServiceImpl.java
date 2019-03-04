@@ -1,5 +1,7 @@
 package com.djorquab.relational.relational.services.impl;
 
+import com.djorquab.relational.relational.commons.PagedResult;
+import com.djorquab.relational.relational.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +19,34 @@ public class PeopleServiceImpl extends AbstractEntityServiceImpl<PersonEntity, L
 
 	public PeopleServiceImpl(@Autowired PersonMapper mapper, @Autowired PeopleRepository repository) {
 		super(mapper, repository);
+	}
+
+	@Override
+	public PagedResult<PersonBO> findPaged(String name, String surname, int page, int size) {
+		if (Utils.checkIfStringIsNull(surname)) {
+			return findPaged(name, page, size);
+		}
+		if (Utils.checkIfStringIsNull(name)) {
+			return findPagedSurname(surname, page, size);
+		}
+		return transform(getRepository().findByNameLikeAndSurnameLike(Utils.toLikeFilter(name), Utils.toLikeFilter(surname), createPaging(page, size)), page, size);
+	}
+
+	@Override
+	public PagedResult<PersonBO> findPaged(String name, int page, int size) {
+		if (Utils.checkIfStringIsNull(name)) {
+			return findAllPaged(page, size);
+		}
+		name = Utils.toLikeFilter(name);
+		return transform(getRepository().findByNameLike(name, createPaging(page, size)), page, size);
+	}
+
+	@Override
+	public PagedResult<PersonBO> findPagedSurname(String surname, int page, int size) {
+		if (Utils.checkIfStringIsNull(surname)) {
+			return findAllPaged(page, size);
+		}
+		surname = Utils.toLikeFilter(surname);
+		return transform(getRepository().findBySurnameLike(surname, createPaging(page, size)), page, size);
 	}
 }

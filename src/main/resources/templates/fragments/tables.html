@@ -1,66 +1,71 @@
+<div th:fragment="tableDefinition">
+	<table th:class="@{'table simple-table-fw ' + ${tableClass != null ? tableClass : ''}}">
+		<thead>
+		<tr>
+			<th th:each="column : ${definition['columns']}" th:text="${column['header']}"></th>
+			<th th:if="${definition['actions'] != null}" th:each="action: ${definition['actions']}"></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="element, iter : ${elements}" th:class="${iter.index%2 == 1 ? 'table-secondary' : ''}">
+			<td th:each="column : ${definition['columns']}" th:variable="${column.variable}">
+				<div th:remove="tag" th:if="${column.withLink}">
+					<a class="table-link" th:variable="${column.variable}" th:link="${column.link}" th:with-path-variable="${column.pathVariable}"
+					   th:type="${column.linkType}" th:value="${element[column.variable]}">
+				</div>
+				<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).TEXT}" th:text="${element[column['variable']]}"></div>
+				<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).IMAGE}">
+					<img class="table-row-image" th:src="${element[column['variable']]}" />
+				</div>
+				<div th:remove="tag" th:if="${column.withLink}">
+					</a>
+				</div>
+			</td>
+			<td th:if="${definition['actions'] != null}" th:each="action : ${definition['actions']}">
+				<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DELETE}">
+					<button
+							th:action-url="${action.path}"
+							th:action-variable-value="${element[action['variable']]}"
+							th:action-path-variable="${action['pathVariable']}"
+							th:action-request-param="${action['requestParam']}"
+							th:action-method="${action.method}"
+							th:parent-id="${id != null ? id : 'paged-table'}"
+							th:new-location="${action['newLocation']}"
+							class="custom-action btn btn-danger">Delete</button>
+				</div>
+				<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).EDIT}">
+					<button
+							th:action-url="${action.path}"
+							th:action-variable-value="${element[action['variable']]}"
+							th:action-path-variable="${action['pathVariable']}"
+							th:action-request-param="${action['requestParam']}"
+							th:action-method="${action.method}"
+							th:parent-id="${id != null ? id : 'paged-table'}"
+							th:new-location="${action['newLocation']}"
+							class="custom-action btn btn-warning">Edit</button>
+				</div>
+				<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DO}">
+					<button
+							th:action-url="${action.path}"
+							th:action-variable-value="${element[action['variable']]}"
+							th:action-path-variable="${action['pathVariable']}"
+							th:action-request-param="${action['requestParam']}"
+							th:action-method="${action.method}"
+							th:parent-id="${id != null ? id : 'paged-table'}"
+							th:new-location="${action['newLocation']}"
+							class="custom-action btn btn-info">Do</button>
+				</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
 <div th:fragment="pagedTable">
 	<div th:id="${id != null ? id : 'paged-table'}" class="paged-table" th:pagination-link="${pagedEndpoint}"
-		th:size="${size}">
-		<table class="table">
-			<thead>
-				<tr>
-					<th th:each="column : ${definition['columns']}" th:text="${column['header']}"></th>
-					<th th:if="${definition['actions'] != null}" th:each="action: ${definition['actions']}"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="element, iter : ${elements}" th:class="${iter.index%2 == 1 ? 'table-secondary' : ''}">
-					<td th:each="column : ${definition['columns']}">
-						<div th:remove="tag" th:if="${column.withLink}">
-							<a class="table-link" th:link="${column.link}" th:with-path-variable="${column.pathVariable}"
-								th:type="${column.linkType}" th:value="${element[column.variable]}">
-						</div>
-						<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).TEXT}" th:text="${element[column['variable']]}"></div>
-						<div th:remove="tag" th:if="${column['type'] == T(com.djorquab.relational.relational.commons.ColumnType).IMAGE}">
-							<img class="table-row-image" th:src="${element[column['variable']]}" />
-						</div>
-						<div th:remove="tag" th:if="${column.withLink}">
-							</a>
-						</div>
-					</td>
-					<td th:if="${definition['actions'] != null}" th:each="action : ${definition['actions']}">
-						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DELETE}">
-							<button
-								th:action-url="${action.path}"
-								th:action-variable-value="${element[action['variable']]}"
-								th:action-path-variable="${action['pathVariable']}"
-								th:action-request-param="${action['requestParam']}"
-								th:action-method="${action.method}"
-								th:parent-id="${id != null ? id : 'paged-table'}"
-								th:new-location="${action['newLocation']}"
-								class="custom-action btn btn-danger">Delete</button>
-						</div>
-						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).EDIT}">
-							<button
-									th:action-url="${action.path}"
-									th:action-variable-value="${element[action['variable']]}"
-									th:action-path-variable="${action['pathVariable']}"
-									th:action-request-param="${action['requestParam']}"
-									th:action-method="${action.method}"
-									th:parent-id="${id != null ? id : 'paged-table'}"
-									th:new-location="${action['newLocation']}"
-									class="custom-action btn btn-warning">Edit</button>
-						</div>
-						<div th:remove="tag" th:if="${action.type == T(com.djorquab.relational.relational.commons.ActionType).DO}">
-							<button
-									th:action-url="${action.path}"
-									th:action-variable-value="${element[action['variable']]}"
-									th:action-path-variable="${action['pathVariable']}"
-									th:action-request-param="${action['requestParam']}"
-									th:action-method="${action.method}"
-									th:parent-id="${id != null ? id : 'paged-table'}"
-									th:new-location="${action['newLocation']}"
-									class="custom-action btn btn-info">Do</button>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		 th:size="${size}">
+		<div th:remove="tag" th:include="fragments/tables :: tableDefinition"
+			 th:with="id=${id}, pagedEndpoint=${pagedEndpoint}, elements=${elements}, definition=${definition}, numberOfPages=${numberOfPages}"></div>
 		<div class="paged-table-pagination">
 			<ul class="pagination">
 				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence((page > 2 ? page-2 : 1), numberOfPages != null ? numberOfPages : 1)}">
@@ -77,4 +82,9 @@
            		});
            </script>
      </th:block>
+</div>
+
+<div th:fragment="selectablePagedTable">
+	<div th:remove="tag" th:include="fragments/tables :: tableDefinition"
+		 th:with="id=${id}, pagedEndpoint=${pagedEndpoint}, definition=${definition}, tableClass='selectable-table'"></div>
 </div>
