@@ -1,10 +1,14 @@
 package com.djorquab.relational.relational.services;
 
-import com.djorquab.relational.relational.bo.PersonBO;
+import com.djorquab.relational.relational.commons.JMSOperation;
+import com.djorquab.relational.relational.commons.StorageType;
+import com.djorquab.relational.relational.commons.StoreAction;
 
 import java.io.Serializable;
 
-public interface StoreService extends Serializable {
-    void createStoreForPerson(PersonBO person);
-    void deleteStoreForPerson(PersonBO person);
+public interface StoreService<E> extends Serializable {
+    boolean doAction(StoreAction<E> action);
+    JMSOperation getAcceptedOperation();
+    StorageType getAcceptedType();
+    boolean canExecute(StoreAction<E> action);
 }

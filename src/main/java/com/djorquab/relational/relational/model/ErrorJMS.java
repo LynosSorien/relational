@@ -1,7 +1,7 @@
 package com.djorquab.relational.relational.model;
 
 import com.djorquab.relational.relational.commons.JMSOperation;
-import com.djorquab.relational.relational.commons.JMSSystem;
+import com.djorquab.relational.relational.commons.StorageType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,9 +26,9 @@ public class ErrorJMS implements AbstractEntity {
     @Enumerated(EnumType.STRING)
     private JMSOperation operation;
 
-    @Column(name = "system")
+    @Column(name = "storageType")
     @Enumerated(EnumType.STRING)
-    private JMSSystem system;
+    private StorageType system;
 
     @Column(name = "payload")
     private String payload;

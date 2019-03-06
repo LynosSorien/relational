@@ -2,7 +2,7 @@ package com.djorquab.relational.relational.bo;
 
 import com.djorquab.relational.relational.commons.ActionType;
 import com.djorquab.relational.relational.commons.JMSOperation;
-import com.djorquab.relational.relational.commons.JMSSystem;
+import com.djorquab.relational.relational.commons.StorageType;
 import com.djorquab.relational.relational.processor.ActionDefinition;
 import com.djorquab.relational.relational.processor.ViewColumn;
 import lombok.AllArgsConstructor;
@@ -25,8 +25,8 @@ public class ErrorJMSBO implements Serializable {
     private Long id;
     @ViewColumn(header = "Operation", position = 0)
     private JMSOperation operation;
-    @ViewColumn(header = "System", position = 1)
-    private JMSSystem system;
+    @ViewColumn(header = "Storage type", position = 1)
+    private StorageType storageType;
     @ViewColumn(header = "Payload", position = 2)
     private String payload;
     @ViewColumn(header = "Created on", position = 3)

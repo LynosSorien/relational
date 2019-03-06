@@ -2,6 +2,9 @@ package com.djorquab.relational.relational.rest.backoffice;
 
 import com.djorquab.relational.relational.RelationalApplication;
 import com.djorquab.relational.relational.bo.PersonBO;
+import com.djorquab.relational.relational.commons.JMSOperation;
+import com.djorquab.relational.relational.commons.StorageType;
+import com.djorquab.relational.relational.commons.StoreAction;
 import com.djorquab.relational.relational.managers.PeopleManager;
 import com.djorquab.relational.relational.managers.PropertyManager;
 import com.djorquab.relational.relational.repositories.ErrorJMSRepository;
@@ -21,6 +24,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = RelationalApplication.class)
@@ -41,7 +45,7 @@ public class AdminTest extends AbstractRestTest {
     private PropertyManager properties;
 
     @Autowired
-    private StoreService storeService;
+    private List<StoreService> stores;
 
     @Before
     public void cleanEvents() {
@@ -63,6 +67,11 @@ public class AdminTest extends AbstractRestTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private <E> void storeAction(JMSOperation operation, StorageType type, E payload) {
+        StoreAction<E> action = StoreAction.<E>builder().operation(operation).type(type).payload(payload).build();
+        stores.forEach(service -> service.doAction(action));
     }
 
     @Test
@@ -92,7 +101,8 @@ public class AdminTest extends AbstractRestTest {
         sleep();
         Assert.assertEquals(0L, errorJMSRepository.count());
 
-        storeService.createStoreForPerson(captainAmerica);
+        storeAction(JMSOperation.CREATE_FOLDER, StorageType.PEOPLE, captainAmerica.getId());
+
         sleep();
         Assert.assertEquals(1L, errorJMSRepository.count());
 
@@ -109,11 +119,11 @@ public class AdminTest extends AbstractRestTest {
         sleep();
         Assert.assertEquals(0L, errorJMSRepository.count());
 
-        storeService.createStoreForPerson(captainAmerica);
+        storeAction(JMSOperation.CREATE_FOLDER, StorageType.PEOPLE, captainAmerica.getId());
         sleep();
         Assert.assertEquals(1L, errorJMSRepository.count());
 
-        storeService.deleteStoreForPerson(captainAmerica);
+        storeAction(JMSOperation.DELETE_FOLDER, StorageType.PEOPLE, captainAmerica.getId());
         sleep();
         Assert.assertEquals(1L, errorJMSRepository.count());
         get("/backoffice/admin/jms/error/doAgain/"+errorJMSRepository.findAll().iterator().next().getId());
@@ -130,7 +140,7 @@ public class AdminTest extends AbstractRestTest {
         sleep();
         Assert.assertEquals(0L, errorJMSRepository.count());
 
-        storeService.createStoreForPerson(captainAmerica);
+        storeAction(JMSOperation.CREATE_FOLDER, StorageType.PEOPLE, captainAmerica.getId());
         sleep();
         Assert.assertEquals(1L, errorJMSRepository.count());
 
@@ -150,7 +160,7 @@ public class AdminTest extends AbstractRestTest {
         sleep();
         Assert.assertEquals(0L, errorJMSRepository.count());
 
-        storeService.deleteStoreForPerson(captainAmerica);
+        storeAction(JMSOperation.DELETE_FOLDER, StorageType.PEOPLE, captainAmerica.getId());
         sleep();
         Assert.assertEquals(1L, errorJMSRepository.count());
     }

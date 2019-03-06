@@ -1,6 +1,7 @@
 package com.djorquab.relational.relational.services.impl;
 
 import com.djorquab.relational.relational.commons.PagedResult;
+import com.djorquab.relational.relational.services.impl.AbstractEntityServiceImpl;
 import com.djorquab.relational.relational.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import com.djorquab.relational.relational.repositories.PeopleRepository;
 import com.djorquab.relational.relational.services.PeopleService;
 
 @Service("peopleService")
-public class PeopleServiceImpl extends AbstractEntityServiceImpl<PersonEntity, Long, PersonBO, PersonMapper, PeopleRepository> 
+public class PeopleServiceImpl extends AbstractEntityServiceImpl<PersonEntity, Long, PersonBO, PersonMapper, PeopleRepository>
 	implements PeopleService {
 	
 	private static final long serialVersionUID = -5626947371108111383L;

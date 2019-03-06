@@ -85,6 +85,24 @@
 </div>
 
 <div th:fragment="selectablePagedTable">
-	<div th:remove="tag" th:include="fragments/tables :: tableDefinition"
-		 th:with="id=${id}, pagedEndpoint=${pagedEndpoint}, definition=${definition}, tableClass='selectable-table'"></div>
+	<div th:id="${id != null ? id : 'paged-table'}" class="selectable-table" th:pagination-link="${pagedEndpoint}"
+		 th:size="${size}">
+		<div th:remove="tag" th:include="fragments/tables :: tableDefinition"
+			 th:with="id=${id}, pagedEndpoint=${pagedEndpoint}, elements=${elements}, definition=${definition}, numberOfPages=${numberOfPages}"></div>
+		<div class="paged-table-pagination">
+			<ul class="pagination">
+				<th:foreach th:remove="tag" th:each="i : ${#numbers.sequence((page > 2 ? page-2 : 1), numberOfPages != null ? numberOfPages : 1)}">
+					<li><a th:max-pages="${numberOfPages}" th:page="${i}" th:class="@{'page-link '+${(i-1) == page ? 'active' : 'link-usable'}}" th:text="${i}"></a></li>
+				</th:foreach>
+			</ul>
+		</div>
+	</div>
+	<th:block layout:fragment="script">
+		<script>
+           		$(document).ready(function() {
+           			scanTables();
+                    scanActions();
+           		});
+           </script>
+	</th:block>
 </div>

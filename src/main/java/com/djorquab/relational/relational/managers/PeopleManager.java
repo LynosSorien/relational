@@ -1,6 +1,9 @@
 package com.djorquab.relational.relational.managers;
 
 import com.djorquab.relational.relational.bo.PersonBO;
+import com.djorquab.relational.relational.commons.JMSOperation;
+import com.djorquab.relational.relational.commons.StorageType;
+import com.djorquab.relational.relational.commons.StoreAction;
 import com.djorquab.relational.relational.services.PeopleService;
 import com.djorquab.relational.relational.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +17,23 @@ public class PeopleManager {
     private PeopleService peopleService;
 
     @Autowired
-    private StoreService storeService;
+    private List<StoreService> services;
 
     public PersonBO create(PersonBO person) {
         PersonBO savedEntity = peopleService.save(person);
-        storeService.createStoreForPerson(savedEntity);
+        executeAction(savedEntity, JMSOperation.CREATE_FOLDER);
         return savedEntity;
     }
 
     public void delete(PersonBO person) {
         if (person != null && person.getId() != null) {
             peopleService.delete(person.getId());
-            storeService.deleteStoreForPerson(person);
+            executeAction(person, JMSOperation.DELETE_FOLDER);
         }
+    }
+
+    private void executeAction(final PersonBO person, final JMSOperation operation) {
+        services.forEach(service -> service.doAction(StoreAction.builder().operation(operation).type(StorageType.PEOPLE).payload(person.getId()).build()));
     }
 
     public void delete(Long id) {

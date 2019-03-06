@@ -1,8 +1,14 @@
 $(document).ready(function() {
     simpleSearchersActivator();
-    $(".selectable-table").each(function(){
-        $(this).dataTable();
-    });
+    /*$(".selectable-table").each(function(){
+        $(this).dataTable(
+            {
+                "paging":   false,
+                "ordering": false,
+                "info":     false
+            }
+        );
+    });*/
     activateSelectableTables();
 });
 

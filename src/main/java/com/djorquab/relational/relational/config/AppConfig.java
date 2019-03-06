@@ -1,7 +1,5 @@
 package com.djorquab.relational.relational.config;
 
-import com.djorquab.relational.relational.services.StoreService;
-import com.djorquab.relational.relational.services.impl.LocalStoreServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
@@ -35,10 +33,5 @@ public class AppConfig {
 		converter.setTargetType(MessageType.TEXT);
 		converter.setTypeIdPropertyName("_type");
 		return converter;
-	}
-
-	@Bean
-	public StoreService storeService() {
-		return new LocalStoreServiceImpl();
 	}
 }

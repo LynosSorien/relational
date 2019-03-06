@@ -4,7 +4,6 @@ import com.djorquab.relational.relational.components.tables.PeopleTable;
 import com.djorquab.relational.relational.managers.PeopleManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,11 +63,10 @@ public class PeopleBackofficeController {
 		log.info("New request to search by {}, {}", name, surname);
 		return BackofficeUtils.fragmentWithTableDefinition("fragments/tables :: selectablePagedTable",
 				PeopleTable.class,
-				"pagedEndpoint", "/backoffice/people/paging",
+				"pagedEndpoint", "/backoffice/people/find/by/paging",
 				"tableClass", "selectable-table",
 				BackofficeConstants.TABLE_RESULT, service.findPaged(name, surname, page-1, size),
-				BackofficeConstants.ID, id,
-				BackofficeConstants.GLOBAL_SUCCESS_MESSAGE, "Person deleted correctly");
+				BackofficeConstants.ID, id);
 	}
 
 	@GetMapping("/find/by/paging")

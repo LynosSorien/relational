@@ -1,5 +1,5 @@
 package com.djorquab.relational.relational.commons;
 
-public enum JMSSystem {
+public enum StorageType {
     PEOPLE
 }
