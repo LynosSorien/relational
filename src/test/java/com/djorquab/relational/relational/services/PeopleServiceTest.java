@@ -1,5 +1,7 @@
 package com.djorquab.relational.relational.services;
 
+import com.djorquab.relational.relational.commons.PagedResult;
+import com.djorquab.relational.relational.managers.PeopleManager;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,12 +24,19 @@ public class PeopleServiceTest extends AbstractTest {
 	
 	@Autowired
 	private PeopleService service;
+
+	@Autowired
+	private PeopleManager manager;
 	
 	private PersonBO create(String name, String surname) {
 		return PersonBO.builder()
 				.name(name)
 				.surname(surname)
 				.build();
+	}
+
+	private PersonBO save(PersonBO person) {
+		return service.save(person);
 	}
 	
 	@Test
@@ -37,5 +46,60 @@ public class PeopleServiceTest extends AbstractTest {
 		Assert.assertNotNull(readed);
 		Assert.assertEquals(readed.getId(), current.getId());
 		Assert.assertEquals(readed.getName(), NAME);
+	}
+
+	@Test
+	public void findPagedTest() {
+		manager.deleteAll();
+
+		Assert.assertEquals(0L, service.count());
+
+		save(create("Serah", "Farron"));
+		save(create("Ecne", "DS"));
+		save(create("Freya", "Asgard"));
+		save(create("Dante", ""));
+		save(create(NAME, SURNAME));
+
+		Assert.assertEquals(5L, service.count());
+
+		PagedResult<PersonBO> pagedResult = service.findAllPaged(0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(5L, pagedResult.getElements().size());
+		Assert.assertEquals(5L, pagedResult.getTotalElements());
+
+		pagedResult = service.findAllPaged(0, 2);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(2L, pagedResult.getElements().size());
+		Assert.assertEquals(5L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPaged("Ecn", 0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(1L, pagedResult.getElements().size());
+		Assert.assertEquals(1L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPagedSurname("r", 0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(2L, pagedResult.getElements().size());
+		Assert.assertEquals(2L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPaged("r", "n", 0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(1L, pagedResult.getElements().size());
+		Assert.assertEquals(1L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPaged("Ecn", null, 0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(1L, pagedResult.getElements().size());
+		Assert.assertEquals(1L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPaged(null, "r", 0, 10);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(2L, pagedResult.getElements().size());
+		Assert.assertEquals(2L, pagedResult.getTotalElements());
+
+		pagedResult = service.findPaged(null, null, 0, 2);
+		Assert.assertNotNull(pagedResult);
+		Assert.assertEquals(2L, pagedResult.getElements().size());
+		Assert.assertEquals(5L, pagedResult.getTotalElements());
 	}
 }
