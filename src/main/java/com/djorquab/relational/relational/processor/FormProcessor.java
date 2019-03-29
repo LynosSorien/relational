@@ -26,12 +26,30 @@ public class FormProcessor extends Processor<FormDefinition, FormField> {
 				.hidden(annotation.hidden());
 		if (FieldType.RELATION.equals(annotation.type())) {
 			builder = builder.searcherInfo(Processors.filterProcessorInstance().extractInfo(annotation.searcher()));
+		} else if (FieldType.LIST.equals(annotation.type())) {
+			FormDefinition<Object> childDefinition = process(field.getType());
+			FormFieldDefinition currentField = builder.build();
+
+			currentField.setFields(childDefinition.getFields());
+
+			instance.getFields().add(currentField);
+			return instance;
 		}
 		instance.getFields().add(builder.build());
 
 		return instance;
 	}
-	
+
+	@Override
+	protected <CA extends Annotation> FormDefinition getObjectInstance(CA classAnnotation) {
+		FormDef annotationDefinition = (FormDef)classAnnotation;
+		FormDefinition<Object> definition = new FormDefinition<>();
+		if (annotationDefinition != null && !Void.class.equals(annotationDefinition.objectType())) {
+			definition.setObject(getInstance(annotationDefinition.objectType()));
+		}
+		return definition;
+	}
+
 	@Override
 	protected <CA extends Annotation> FormDefinition feedClassAnnotation(
 			FormDefinition instance, CA annotation) {

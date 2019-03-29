@@ -2,6 +2,7 @@ package com.djorquab.relational.relational.bo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.djorquab.relational.relational.commons.ActionType;
@@ -24,8 +25,8 @@ public class PersonBO implements Serializable {
 
 	@ViewColumn(header = "ID", position = 0, link = "/backoffice/people/view", pathVariable = true, linkable = true,
 			actions = {
-					@ActionDefinition(active = true, type = ActionType.EDIT, path = "/backoffice/people/edit", requestParam = "personId", newLocation = true),
-					@ActionDefinition(active = true, type = ActionType.DELETE, path = "/backoffice/people", requestParam = "personId", method = "DELETE")
+					@ActionDefinition(type = ActionType.EDIT, path = "/backoffice/people/edit", requestParam = "personId", newLocation = true),
+					@ActionDefinition(type = ActionType.DELETE, path = "/backoffice/people", requestParam = "personId", method = "DELETE")
 			}
 	)
 	private Long id;
@@ -58,6 +59,7 @@ public class PersonBO implements Serializable {
 		this.tryTimes = this.tryTimes + 1;
 		return this;
 	}
-	
-	private List<PeopleRelationBO> peopleRelations;
+
+	@Builder.Default
+	private List<PersonBO> personRelations = new LinkedList<>();
 }

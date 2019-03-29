@@ -11,8 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class FormDefinition implements Serializable {
+public class FormDefinition<T> implements Serializable {
 	private static final long serialVersionUID = -1363693446820281697L;
 
 	private String title;
@@ -21,4 +20,5 @@ public class FormDefinition implements Serializable {
 	private String submitButtonLabel;
 	private List<FormFieldDefinition> fields;
 	private String navigateTo;
+	private T object;
 }

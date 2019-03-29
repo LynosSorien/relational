@@ -22,10 +22,10 @@ import com.djorquab.relational.relational.processor.Processors;
 public class FormProcessorTest extends AbstractTest {
 	private FormProcessor processor = Processors.formProcessorInstance();
 	
-	public static final String ID = "ID";
-	public static final String NAME = "Name";
-	public static final String SUBMIT_BUTTON = "Test";
-	public static final String SUBMIT_LINK = "www.google.com";
+	static final String ID = "ID";
+	static final String NAME = "Name";
+	static final String SUBMIT_BUTTON = "Test";
+	static final String SUBMIT_LINK = "www.google.com";
 	
 	@Test
 	public void nullTest() {
@@ -38,7 +38,7 @@ public class FormProcessorTest extends AbstractTest {
 		Assert.assertNotNull(definition);
 		Assert.assertNull(definition.getMethod());
 		Assert.assertEquals(1L, definition.getFields().size());
-		FormFieldDefinition field = definition.getFields().get(0);
+		FormFieldDefinition field = (FormFieldDefinition) definition.getFields().get(0);
 		Assert.assertEquals(NAME, field.getLabel());
 		Assert.assertEquals("name", field.getVariable());
 		Assert.assertEquals(FieldType.TEXT, field.getType());
@@ -52,7 +52,7 @@ public class FormProcessorTest extends AbstractTest {
 		Assert.assertEquals(definition.getSubmitButtonLabel(), SUBMIT_BUTTON);
 		Assert.assertEquals(definition.getSubmitLink(), SUBMIT_LINK);
 		Assert.assertEquals(1L, definition.getFields().size());
-		FormFieldDefinition field = definition.getFields().get(0);
+		FormFieldDefinition field = (FormFieldDefinition) definition.getFields().get(0);
 		Assert.assertEquals(NAME, field.getLabel());
 		Assert.assertEquals("name", field.getVariable());
 		Assert.assertEquals(FieldType.TEXT, field.getType());

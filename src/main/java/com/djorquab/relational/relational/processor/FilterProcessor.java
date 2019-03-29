@@ -3,6 +3,7 @@ package com.djorquab.relational.relational.processor;
 import com.djorquab.relational.relational.commons.Filter;
 import com.djorquab.relational.relational.commons.SearcherInfo;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class FilterProcessor extends Processor<List<Filter>, FieldFilter> {
     }
 
     @Override
-    protected List<Filter> getObjectInstance() {
+    protected <CA extends Annotation>List<Filter> getObjectInstance(CA classAnnotation) {
         return new LinkedList<>();
     }
 

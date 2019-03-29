@@ -1,4 +1,4 @@
-<div xmlns:th="http://www.thymeleaf.org" th:fragment="simpleCreationForm">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="simpleCreationForm" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<form th:id="${id != null && id != '' ? id : 'simple-creation-form'}" th:class="@{'simple-creation-form custom-forms ' + ${formClass != null ? formClass : ''}}"
 		th:link="${form['submitLink']}" th:method="${form['method']}" th:navigate-to="${form.navigateTo}" th:action="${form['submitLink']}"
 		th:callbacks="${callbacks}" th:callback-types="${callbackTypes}" th:callback-urls="${callbackUrls}"
@@ -31,6 +31,19 @@
 					<div th:remove="tag" th:include="fragments/searchers :: simpleSearcher"
 						 th:with="searchLink=${field.searcherInfo.searchLink}, acceptLink=${field.searcherInfo.acceptLink}, paginationLink=${field.searcherInfo.paginationLink}, filters=${field.searcherInfo.filters}, tableDefinition=${field.searcherInfo.tableDefinition}" ></div>
 				</div>
+				<div th:if="${field.type == T(com.djorquab.relational.relational.commons.FieldType).LIST}">
+					<div th:class="@{'form-group col-sm-'+${field.colspan}}">
+						<h4 th:text="${field.label}"></h4>
+						<a class="add-button btn btn-info" th:target-id="${id != null && id != 'list-form' ? id : 'list-simple-creation-form'}"
+						   th:add-endpoint="${field.addLink}"
+						   th:remove-endpoint="field.removeLink"
+						   th:attribute="${field['variable']}">
+							<span class="glyphicon glyphicon-plus"></span>
+						</a>
+						<div th:remove="tag" th:include="fragments/forms :: simpleCreationForm"
+							 th:with="form=${field}, formClass='jumbotron no-submittable-form', items=${object[field['variable']]}" ></div>
+					</div>
+				</div>
 				<div th:if="${field.hidden}" style="display:none!important;">
 					<input th:value="${object != null ? object[field.variable] : ''}" th:id="${field.variable}" type="text" th:class="@{'form-control form-item'}" th:variable="${field.variable}" th:name="${field.variable != null ? field.variable : 'var'}" th:submit="${true}" style="display:none!important;"/>
 				</div>
@@ -38,6 +51,30 @@
 		</div>
 		<button class="custom-submit-button btn btn-info">[[${form['submitButtonLabel']}]]</button>
 	</form>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+		$(".add-button").click(function() {
+	    let link = $(this).attr("add-endpoint");
+	    let targetId = $(this).attr("target-id");
+	    link = link + "?id="+targetId;
+        $.ajax({
+            url: link,
+            method: 'POST',
+            data: JSON.stringify(/*[[${object}]]*/),
+            success: function(data) {
+                $("#"+targetId).replaceWith(data);
+            }
+        });
+    });
+	/*]]>*/
+	</script>
+</div>
+
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="listForm">
+	<div th:id="${id}">
+		<div th:each="item, iter : ${items}" th:remove="tag" th:include="fragments/forms :: simpleCreationForm"
+			 th:with="id='${id + '-' + iter.index}',form=${field}, formClass='jumbotron no-submittable-form', object=${item}" ></div>
+	</div>
 </div>
 
 <div xmlns:th="http://www.thymeleaf.org" th:fragment="assetsUploadForm">

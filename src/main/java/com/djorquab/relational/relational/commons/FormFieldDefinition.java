@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FormFieldDefinition implements Comparable<FormFieldDefinition>, Serializable {
+public class FormFieldDefinition extends FormDefinition implements Comparable<FormFieldDefinition>, Serializable {
 	private static final long serialVersionUID = -1273250837751498006L;
 
 	@Builder.Default
@@ -23,6 +23,8 @@ public class FormFieldDefinition implements Comparable<FormFieldDefinition>, Ser
 	private SearcherInfo searcherInfo;
 	private int position;
 	private int colspan;
+	private String addLink;
+	private String removeLink;
 	
 	
 	@Override

@@ -46,7 +46,7 @@ public class PeopleBackofficeController {
 			@RequestParam(name = BackofficeConstants.ID, defaultValue = "") String id) {
 		PagedResult<PersonBO> result = service.findAllPaged(page-1, size);
 		log.info("Paged result {}", result);
-		return BackofficeUtils.fragmentWithTableDefinition("fragments/tables :: pagedTable",
+		return BackofficeUtils.fragmentWithTableDefinition("fragments/tables :: selectablePagedTable",
 				PersonBO.class,
 				"pagedEndpoint", "/backoffice/people/paging", // FIXME ? - View if this is required or we can obtain it using jquery
 				BackofficeConstants.TABLE_RESULT, result,

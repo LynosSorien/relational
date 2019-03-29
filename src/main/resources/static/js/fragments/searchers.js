@@ -44,7 +44,7 @@ function simpleSearchersActivator() {
             let selected = searcherSimple.find("tr.selected");
             if (selected) {
                 searcherSimple.find(".searcher-shown-field").each(function() {
-                    $(this).val(selected.find("[variable='"+$(this).attr("attribute")+"']").val());
+                    $(this).val($.trim(selected.find("[variable='"+$(this).attr("attribute")+"']").html()));
                 });
             } else {
                 searcherSimple.find(".searcher-shown-field").each(function() {
@@ -68,7 +68,7 @@ function simpleSearchersActivator() {
                 url: currentSearch,
                 method: 'GET',
                 success: function(data) {
-                    searcherSimple.find(".simple-table-fw").replaceWith(data);
+                    searcherSimple.find(".selectable-table-wrapper").replaceWith(data);
                     scanTables();
                     activateSelectableTables();
                 }

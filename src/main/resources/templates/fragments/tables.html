@@ -85,7 +85,7 @@
 </div>
 
 <div th:fragment="selectablePagedTable">
-	<div th:id="${id != null ? id : 'paged-table'}" class="selectable-table" th:pagination-link="${pagedEndpoint}"
+	<div th:id="${id != null ? id : 'paged-table'}" class="selectable-table-wrapper paged-table-wrapper" th:pagination-link="${pagedEndpoint}"
 		 th:size="${size}">
 		<div th:remove="tag" th:include="fragments/tables :: tableDefinition"
 			 th:with="id=${id}, pagedEndpoint=${pagedEndpoint}, elements=${elements}, definition=${definition}, numberOfPages=${numberOfPages}"></div>

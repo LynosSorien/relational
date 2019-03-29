@@ -21,6 +21,9 @@ public @interface FormField {
 	int colspan() default 12;
 	boolean hidden() default false;
 
+	ListField listField() default @ListField(addLink = "", removeLink = "");
+
+
 	@Retention(RetentionPolicy.RUNTIME)
 	@interface Searcher {
 		Class<?> searcher();
@@ -28,5 +31,11 @@ public @interface FormField {
 		String searchLink() default "";
 		String acceptLink() default "";
 		Class<?> tableDefinition();
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
+	@interface ListField {
+		String addLink();
+		String removeLink();
 	}
 }

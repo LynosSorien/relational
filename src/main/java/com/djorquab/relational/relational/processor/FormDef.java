@@ -10,4 +10,5 @@ public @interface FormDef {
 	String method() default "POST";
 	String navigateTo() default "";
 	String submitButtonLabel() default "Submit";// TODO change for identificators to bundle.
+	Class<?> objectType() default Void.class;
 }

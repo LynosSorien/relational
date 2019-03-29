@@ -41,6 +41,8 @@ public class PeopleBackofficeTest extends AbstractRestTest {
 	@WithMockUser(username = "testing")
 	public void simplePetitions() {
 		get("/backoffice/people");
+		get("/backoffice/people/find/by");
+		get("/backoffice/people/find/by/paging");
 		get("/backoffice/people/paging");
 		get("/backoffice/people/creation");
 		get("/backoffice/people/edit", new TestParam<>("personId", 1L));

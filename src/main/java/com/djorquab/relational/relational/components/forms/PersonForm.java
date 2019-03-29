@@ -2,12 +2,8 @@ package com.djorquab.relational.relational.components.forms;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import com.djorquab.relational.relational.bo.PersonBO;
 import com.djorquab.relational.relational.commons.FieldType;
-import com.djorquab.relational.relational.components.filters.PeopleSearcher;
-import com.djorquab.relational.relational.components.tables.PeopleTable;
 import com.djorquab.relational.relational.processor.FormDef;
 import com.djorquab.relational.relational.processor.FormField;
 import lombok.AllArgsConstructor;
@@ -42,8 +38,13 @@ public class PersonForm implements Serializable {
 	@FormField(label = "Deathdate", type = FieldType.DATE, colspan = 4, position = 5)
 	private Date deathdate;
 
+	@FormField(label = "People relations", type = FieldType.LIST, position = 6)
+	private PersonRelationForm personRelations;
+
+	/*
 	@FormField(label = "People relations", type = FieldType.RELATION,
-			searcher = @FormField.Searcher(searcher = PeopleSearcher.class, acceptLink = "", paginationLink = "", searchLink = "/backoffice/people/find/by", tableDefinition = PeopleTable.class),
+			searcher = @FormField.Searcher(searcher = PeopleSearcher.class, searchLink = "/backoffice/people/find/by", tableDefinition = PeopleTable.class),
 			position = 6)
 	private List<PersonBO> peopleRelations;
+	*/
 }

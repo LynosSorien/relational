@@ -22,13 +22,16 @@ public abstract class Processor<E, A extends Annotation> {
 			if (scannedItems.containsKey(clazz.getName())) {
 				return scannedItems.get(clazz.getName());
 			}
-			E instance = getObjectInstance();
 			Class<CA> classAnnotation = classAnnotation();
+			E instance;
 			if (classAnnotation != null) {
 				CA ca = clazz.getAnnotation(classAnnotation);
+				instance = getObjectInstance(ca);
 				if (ca != null) {
 					instance = feedClassAnnotation(instance, ca);
 				}
+			} else {
+				instance = getObjectInstance(null);
 			}
 			Class<A> annotationClass = annotationClass();
 			Field[] fields = clazz.getDeclaredFields();
@@ -64,14 +67,19 @@ public abstract class Processor<E, A extends Annotation> {
 		return true;
 	}
 	protected abstract E processField(A annotation, E instance, Field field);
-	protected E getObjectInstance() {
+	protected <CA extends Annotation>E getObjectInstance(CA classAnnotation) {
+		return getInstance(instanceClass());
+	}
+
+	protected <O> O getInstance(Class<O> clazz) {
 		try {
-			return instanceClass().newInstance();
+			return clazz.newInstance();
 		} catch (InstantiationException|IllegalAccessException e) {
 			log.error("Unexpected error occured while trying to create new instance {}", e);
 		}
 		return null;
 	}
+
 	protected abstract Class<A> annotationClass();
 	protected abstract Class<E> instanceClass();
 }

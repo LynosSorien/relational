@@ -1,5 +1,8 @@
 $(document).ready(function() {
 	loadDatepickers();
+
+	$(".no-submittable-form").find(".custom-submit-button").css("display", "none");
+
 });
 
 function loadDatepickers() {
